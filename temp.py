@@ -7,7 +7,7 @@ from PySide6.QtCore import Qt, QUrl
 
 
 HOST = "127.0.0.1"
-PORT = 4848
+PORT = 4848    
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect((HOST,PORT))
@@ -280,13 +280,13 @@ class mainframe(QFrame):
                 rf = QFrame(self.widget)
                 self.mrl.addWidget(rf,a,0)
                 fl = QGridLayout(rf)
-                locl = QLabel(str(reports[a][0]))
+                locl = QLabel(f"Location of Incident:\t{str(reports[a][0])}")
                 fl.addWidget(locl, 0,0, alignment=left)
-                npal = QLabel(str(reports[a][1]))
+                npal = QLabel(f"Number of People affected:\t{str(reports[a][1])}")
                 fl.addWidget(npal, 1,0, alignment=left)
-                taccdl = QLabel(str(reports[a][2]))
+                taccdl = QLabel(f"Type of Incident{str(reports[a][2])}")
                 fl.addWidget(taccdl, 2,0, alignment=left)
-                stsl = QLabel("Open" if str(reports[a][3]) == "1" else "Closed")
+                stsl = QLabel("Status:\tOpen" if str(reports[a][3]) == "1" else "Status:\tClosed")
                 fl.addWidget(stsl, 3,0, alignment=left)
 
 
