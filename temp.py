@@ -6,6 +6,12 @@ from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtCore import Qt, QUrl
 
 
+HOST = "127.0.0.1"
+PORT = 4848
+
+# client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# client.bind((HOST,PORT))
+
 centre = Qt.AlignmentFlag.AlignCenter
 top = Qt.AlignmentFlag.AlignTop
 bottom = Qt.AlignmentFlag.AlignBottom
