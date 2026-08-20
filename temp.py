@@ -221,7 +221,17 @@ class mainframe(QFrame):
         def __init__(self,parent):
             super().__init__(parent)
 
-            self.setStyleSheet("QFrame{backgroud-color:red; border: 1px solid black}")
+            self.setStyleSheet("""
+                QFrame{
+                    backgroud-color:red;
+                    border: 1px solid black
+                }
+                QLabel{
+                    color: black;
+                    font-size: 11px;
+                    font-weight: bold;
+                }
+                """)
             
             mrl = QGridLayout(self)
 
