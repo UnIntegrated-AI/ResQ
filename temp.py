@@ -1,4 +1,4 @@
-
+ 
 import socket
 import json
 import csv
@@ -86,18 +86,19 @@ class mainframe(QFrame):
         rptfl.setRowStretch(0,1)
         rptfl.setRowStretch(1,1)
         rptfl.setRowStretch(2,1)
-        rptfl.setRowStretch(3,1)
+        # rptfl.setRowStretch(3,1)
 
-        styl = "margin: 30 100;"
+        styl = "margin: 30 100;" 
+
+        location_heading = QLabel("Location of Incident")
+        rptfl.addItem(location_heading, 0,0)
 
         location_combo = QComboBox(reportf)
         reader = ["hello", "world"]
         for row in reader:
             if row:
                 location_combo.addItem(row)
-        result = location_combo.currentText()
-        print(result)
-        rptfl.addWidget(location_combo, 0,0, alignment=centre | default)
+        rptfl.addWidget(location_combo, 0,1)
 
         
         
