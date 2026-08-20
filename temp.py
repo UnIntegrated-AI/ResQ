@@ -34,7 +34,10 @@ class user_details(QFrame):
     def __init__(self, parent):
         super().__init__(parent)
 
-        self.setStyleSheet("border: 1px solid orange; background-color: blue;")
+        self.setStyleSheet("""
+            QFrame{
+            }
+        """)
 
         l = QLabel("userdetails")
         
@@ -98,10 +101,11 @@ class mainframe(QFrame):
         rptfl.addWidget(location_heading, 0,0)
 
         location_combo = QComboBox(reportf)
-        reader = ["hello", "world"]  
-        for row in reader: 
-            if row:
-                location_combo.addItem(row)
+        with open("accident_prione_areas.csv","r") as f:
+            reader = csv.reader(f)
+            next(reader)
+            for row in reader:
+                location_combo.addItem(row[1])
         rptfl.addWidget(location_combo, 0,1)
 
         #no. of pepole affected thing
@@ -128,31 +132,6 @@ class mainframe(QFrame):
 
         report_btn = QPushButton("Report", reportf)
         rptfl.addWidget(report_btn,3,0,1,2,alignment=Qt.AlignmentFlag.AlignHCenter) 
-
-    def open_map(self):
-
-        self.map_window = QDialog(self)
-
-        self.map_window.setWindowTitle("Select Location")
-        self.map_window.resize(900, 600)
-
-        layout = QVBoxLayout(self.map_window)
-
-        self.map_view = QWebEngineView()
-
-        self.map_view.setUrl(
-            QUrl.fromLocalFile(
-                "map.html"
-            )
-        )
-
-        layout.addWidget(self.map_view)
-
-        self.map_view.setUrl(self.map_url)
-
-        layout.addWidget(self.map_view)
-
-        self.map_window.show()
 
 class loginframe(QFrame):
     def __init__(self, parent, layoutapp):
