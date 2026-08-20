@@ -105,7 +105,7 @@ class mainframe(QFrame):
         self.lmf.addWidget(self.reportframe)
         self.reportframe.hide() 
    
-    class reportf(QFrame):
+    class reportf(QFrame): 
         def __init__(self,parent):
             super().__init__(parent)
             self.setStyleSheet("QFrame{border: 1px solid #DC2626; border-radius: 8px;}")  
@@ -203,6 +203,11 @@ class mainframe(QFrame):
 
     def report(self):
         self.reportframe.show()
+
+    class myreportsf(QFrame):
+        def __init__(self,parent):
+            super().__inti__(parent)
+            
     
 class loginframe(QFrame):
     def __init__(self, parent, layoutapp):
