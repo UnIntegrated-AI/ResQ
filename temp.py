@@ -94,12 +94,11 @@ class mainframe(QFrame):
         self.lmf.addWidget(nav_container,0,0, alignment=top)
 
         report_btn = QPushButton("Report an Accident", nav_container)
-        report_btn.setObjectName("Report_nav")
         report_btn.clicked.connect(self.report)
         ncl.addWidget(report_btn,0,0)
 
         yreports_btn = QPushButton("My Reports", nav_container)
-        report_btn.setObjectName("my_reports")
+        yreports_btn.clicked.connect(self.myreports)
         ncl.addWidget(yreports_btn,0,1)
 
 
@@ -110,6 +109,10 @@ class mainframe(QFrame):
         self.reportframe = self.reportf(self)
         self.lmf.addWidget(self.reportframe)
         self.reportframe.hide() 
+
+        self.myreportsframe = self.myreportsf(self)
+        self.lmf.addWidget(self.myreportsframe)
+        self.myreportsframe.hide()
    
     class reportf(QFrame): 
         def __init__(self,parent):
@@ -211,6 +214,7 @@ class mainframe(QFrame):
             print(f"location:{location}\nno. of pepole affected:{npa}\ntype of incident:{taccd}")
  
     def report(self):
+        self.myreportsframe.hide()
         self.reportframe.show()
 
     class myreportsf(QScrollArea): 
@@ -233,7 +237,9 @@ class mainframe(QFrame):
                 fl.addWidget(taccdl, 2,0, alignment=left)
                 stsl = QLabel(reports[a][3])
                 fl.addWidget(stsl, 3,0, alignment=left)
-            
+    def myreports(self):
+        self.myreportsframe.show()
+        self.reportframe.hide()
     
 class loginframe(QFrame):
     def __init__(self, parent, layoutapp):
