@@ -219,7 +219,7 @@ class mainframe(QFrame):
             
             mrl = QGridLayout(self)
 
-            reports = []
+            reports = [["vikaspuri", 3, "road accident", "opened"],["uttam nagar", 1, "road accident", "closed"]]
 
             for a in range(len(reports)):
                 rf = QFrame(self)
