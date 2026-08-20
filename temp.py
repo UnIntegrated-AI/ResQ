@@ -103,8 +103,9 @@ class mainframe(QFrame):
         self.lmf.setRowStretch(1,1)
 
         self.reportframe = self.reportf(self)
+        self.lmf.addWidget(self.reportframe)
         self.reportframe.hide()
-  
+   
     class reportf(QFrame):
         def __init__(self,parent):
             super().__init__(parent)
