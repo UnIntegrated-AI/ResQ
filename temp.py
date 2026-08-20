@@ -108,7 +108,7 @@ class mainframe(QFrame):
     class reportf(QFrame):
         def __init__(self,parent):
             super().__init__(parent)
-            self.setStyleSheet("QFrame{border: 1px solid #DC2626; border-radius: 8px;}")
+            self.setStyleSheet("QFrame{border: 1px solid #DC2626; border-radius: 8px;}")  
             rptfl = QGridLayout(self)
 
             rptfl.setRowStretch(0,1)
@@ -120,8 +120,8 @@ class mainframe(QFrame):
 
             self.setStyleSheet("""
             QFrame{
-                background-color: whitesmoke;
-                color: black;
+                border: 1px solid #DC2626;
+                border-radius: 8px;
             }
             QPushButton{
                 background-color: #DC2626;
@@ -133,7 +133,7 @@ class mainframe(QFrame):
                 font-weight: bold;
             }
             QSpinBox{
-                background-color: white;
+                background-color: #f8f8ba;
                 color: #172033;
                 border: 1px solid #D1D5DB;
                 border-radius: 8px;
@@ -141,12 +141,17 @@ class mainframe(QFrame):
                 font-size: 14px;
             }
             QComboBox{
-                background-color: white;
+                background-color: #f8f8ba;
                 color: #172033;
                 border: 1px solid #D1D5DB;
                 border-radius: 8px;
                 padding: 10px;
                 font-size: 14px;
+            }
+            QLabel{
+                color: black;
+                font-size: 14px;
+                font-weight: bold;
             }
          """)
 
@@ -208,7 +213,7 @@ class loginframe(QFrame):
 
         self.setStyleSheet("""
             QFrame {
-                background-color: #F4F7FA;
+                background-color: #f8f8ba;
             }
 
             QLabel#title {
@@ -223,7 +228,7 @@ class loginframe(QFrame):
             }
 
             QLineEdit {
-                background-color: white;
+                background-color: #f8f8ba;
                 color: #172033;
                 border: 1px solid #D1D5DB;
                 border-radius: 8px;
