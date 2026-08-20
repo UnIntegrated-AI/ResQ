@@ -1,3 +1,4 @@
+ 
 import socket
 import json
 import csv
@@ -16,36 +17,6 @@ centre = Qt.AlignmentFlag.AlignCenter
 top = Qt.AlignmentFlag.AlignTop
 bottom = Qt.AlignmentFlag.AlignBottom
 left = Qt.AlignmentFlag.AlignLeft
-
-def recv_exact(sock, size):
-    data = b""
-    while len(data) < size:
-        chunk = sock.recv(size - len(data))
-        if not chunk:
-            return None
-        data += chunk
-    return data
-
-
-def send_packet(sock, packet):
-    data = json.dumps(packet).encode()
-    length = len(data).to_bytes(4, "big")
-    sock.sendall(length + data)
-
-
-def recv_packet(sock):
-    header = recv_exact(sock, 4)
-
-    if not header:
-        return None
-
-    length = int.from_bytes(header, "big")
-    data = recv_exact(sock, length)
-
-    if not data:
-        return None
-
-    return json.loads(data.decode())
 
 class App(QApplication):
     def __init__(self):
