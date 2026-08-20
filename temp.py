@@ -115,7 +115,7 @@ class mainframe(QFrame):
             rptfl.setRowStretch(0,1)
             rptfl.setRowStretch(1,1)
             rptfl.setRowStretch(2,1)
-
+ 
             rptfl.setColumnStretch(0,3)
             rptfl.setColumnStretch(1,5)
 
@@ -193,9 +193,9 @@ class mainframe(QFrame):
 
 
         def report_func(self):
-            location = self.location_combo.currentData()
+            location = self.location_combo.currentText()
             npa = self.npa.value()
-            taccd = self.taccd.currentData()
+            taccd = self.taccd.currentText()
 
             print(f"location:{location}\nno. of pepole affected:{npa}\ntype of incident:{taccd}")
 
