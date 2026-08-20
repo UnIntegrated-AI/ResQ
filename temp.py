@@ -87,8 +87,8 @@ class mainframe(QFrame):
         rptfl.setRowStretch(1,1)
         rptfl.setRowStretch(2,1)
 
-        rptfl.setColumnStretch(0,1)
-        rptfl.setColumnStretch(1,3)
+        rptfl.setColumnStretch(0,3)
+        rptfl.setColumnStretch(1,5)
 
         styl = "margin: 30 100;" 
  
@@ -99,7 +99,7 @@ class mainframe(QFrame):
 
         location_combo = QComboBox(reportf)
         reader = ["hello", "world"]  
-        for row in reader:
+        for row in reader: 
             if row:
                 location_combo.addItem(row)
         rptfl.addWidget(location_combo, 0,1)
@@ -114,20 +114,20 @@ class mainframe(QFrame):
         rptfl.addWidget(npa, 1,1)
 
         # type of accident thing
-        taccd_heading = QLabel("Type of Incident")
+        taccd_heading = QLabel("Type of Incident") 
         rptfl.addWidget(taccd_heading, 2,0)
 
         type_of_accidents = ["Road Accident", "Landslide", "Fuel", "Motor support"]
 
         taccd = QComboBox(reportf)
-        for a in type_of_accidents:
+        for a in type_of_accidents: 
             taccd.addItem(a)
-        rptfl.addWidget(taccd, 2,1)
+        rptfl.addWidget(taccd, 2,1) 
 
         # submit button
 
         report_btn = QPushButton("Report", reportf)
-        rptfl.addWidget(report_btn,3,1,1,2,alignment=Qt.AlignmentFlag.AlignHCenter)
+        rptfl.addWidget(report_btn,3,0,1,2,alignment=Qt.AlignmentFlag.AlignHCenter) 
 
     def open_map(self):
 
