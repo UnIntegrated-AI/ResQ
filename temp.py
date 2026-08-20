@@ -110,7 +110,7 @@ class mainframe(QFrame):
         
         npa = QSpinBox(reportf)
         npa.setMinimum(1) 
-        npa.setMaximum(100)
+        npa.setMaximum(100) 
         rptfl.addWidget(npa, 1,1)
 
         # type of accident thing
@@ -126,7 +126,8 @@ class mainframe(QFrame):
 
         # submit button
 
-        report_btn = QPushButton()
+        report_btn = QPushButton("Report", reportf)
+        rptfl.addWidget(report_btn,3,1,1,2,alignment=Qt.AlignmentFlag.AlignHCenter)
 
     def open_map(self):
 
