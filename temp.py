@@ -220,6 +220,8 @@ class mainframe(QFrame):
     class myreportsf(QScrollArea): 
         def __init__(self,parent):
             super().__init__(parent)
+
+            self.setStyleSheet("QFrame{backgroud:red;}")
             
             mrl = QGridLayout(self)
 
