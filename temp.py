@@ -52,11 +52,12 @@ class maincontainer(QFrame):
         lmc = QGridLayout(self)
 
         udf = user_details(self)
-        udf.setMaximumWidth(200)
         lmc.addWidget(udf,0,1)
         mff = mainframe(self)
-        mff.setMaximumWidth(600)
         lmc.addWidget(mff,0,0)
+
+        lmc.setColumnStretch(0,3)
+        lmc.setColumnStretch(1,1)
 
 class mainframe(QFrame):
     def __init__(self, parent):
@@ -122,7 +123,7 @@ class mainframe(QFrame):
         for row in reader:
             location_combo.addItem(row)
         rptfl.addWidget(location_combo, 0,1)
-
+ 
         #no. of pepole affected thing 
         npa_heading = QLabel("No. of people affected")
         rptfl.addWidget(npa_heading, 1,0)
