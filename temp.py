@@ -63,12 +63,22 @@ class mainframe(QFrame):
 
         self.lmf = QGridLayout(self)
 
+        self.setStyleSheet("""
+            QFrame{
+                background-color: whitesmoke;
+            }
+            QPushButton#Report_nav{
+                background-color: whitesmoke;
+            }
+        """)
+
         nav_container = QFrame(self)
         ncl = QGridLayout(nav_container)
         nav_container.setStyleSheet("QFrame{border: 1px solid orange;}")
         self.lmf.addWidget(nav_container,0,0, alignment=top)
 
         report_btn = QPushButton("Report an Accident", nav_container)
+        report_btn.setObjectName("Report_nav")
         report_btn.clicked.connect(self.report)
         ncl.addWidget(report_btn,0,0)
 
@@ -92,8 +102,6 @@ class mainframe(QFrame):
 
         rptfl.setColumnStretch(0,3)
         rptfl.setColumnStretch(1,5)
-
-        styl = "margin: 30 100;" 
  
 
         #Location thing
@@ -101,7 +109,7 @@ class mainframe(QFrame):
         rptfl.addWidget(location_heading, 0,0)
 
         location_combo = QComboBox(reportf)
-        with open("accident_prione_areas.csv","r") as f:
+        with open(r"C:\Users\yadav\OneDrive\Desktop\Ansh\New folder\Accident Prone Areas\accident_prone_areas.csv","r") as f:
             reader = csv.reader(f)
             next(reader)
             for row in reader:
