@@ -2,8 +2,7 @@
 import socket
 import json
 import csv
-from PySide6.QtWidgets import QApplication, QWidget, QLabel, QGridLayout, QFrame, QLineEdit , QPushButton, QDialog, QVBoxLayout, QComboBox, QSpinBox, QScrollArea
-from PySide6.QtWebEngineWidgets import QWebEngineView
+from PySide6.QtWidgets import QApplication, QWidget, QLabel, QGridLayout, QFrame, QLineEdit , QPushButton, QComboBox, QSpinBox, QScrollArea
 from PySide6.QtCore import Qt, QUrl
 
 
@@ -11,7 +10,7 @@ HOST = "127.0.0.1"
 PORT = 4848
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.bind((HOST,PORT))
+client.connect((HOST,PORT))
 
 centre = Qt.AlignmentFlag.AlignCenter
 top = Qt.AlignmentFlag.AlignTop
@@ -203,12 +202,12 @@ class mainframe(QFrame):
             rptfl.addWidget(location_heading, 0,0)
 
             self.location_combo = QComboBox(self)
-            # with open(r"C:\Users\yadav\OneDrive\Desktop\Ansh\New folder\Accident Prone Areas\accident_prone_areas.csv","r") as f:
-            #     reader = csv.reader(f)
-            #     next(reader)
-            reader = ["hello", "world", "wow","nice"]
-            for row in reader:
-                self.location_combo.addItem(row)
+            with open("accident_prone_areas.csv","r") as f:
+                reader = csv.reader(f)
+                next(reader)
+            # reader = ["hello", "world", "wow","nice"]
+                for row in reader:
+                    self.location_combo.addItem(row[1])
             rptfl.addWidget(self.location_combo, 0,1)
 
             #no. of pepole affected thing 
@@ -253,15 +252,22 @@ class mainframe(QFrame):
             super().__init__(parent)
             self.widget = QWidget()
             self.setWidget(self.widget)
-            send_packet(client, {"type":"view_reports"})
-            result = recv_packet(client)
-            self.setWidgetResizable(True) 
-            # self.horizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
+            self.setWidgetResizable(True)
+            self.display_reports()
 
+        def display_reports(self):    
+            reports = self.get_reports()
+
+            old_widget = self.widget
+            old_widget.deleteLater()
+
+            self.widget = QWidget()
+            self.setWidget(self.widget)
+
+            self.mrl = QGridLayout(self.widget)
             self.setStyleSheet(""" 
                 QFrame{  
-                    backgroud-color:red;
-                    border: 1px solid black
+                    border: 1px solid black;
                 }
                 QLabel{
                     color: black;
@@ -270,23 +276,28 @@ class mainframe(QFrame):
                 } 
                 """)
             
-            mrl = QGridLayout(self.widget)
-
-            reports = result["reports"]
-
             for a in range(len(reports)):
                 rf = QFrame(self.widget)
-                mrl.addWidget(rf,a,0)
+                self.mrl.addWidget(rf,a,0)
                 fl = QGridLayout(rf)
-                locl = QLabel(reports[a][0])
+                locl = QLabel(str(reports[a][0]))
                 fl.addWidget(locl, 0,0, alignment=left)
-                npal = QLabel(reports[a][1])
+                npal = QLabel(str(reports[a][1]))
                 fl.addWidget(npal, 1,0, alignment=left)
-                taccdl = QLabel(reports[a][2])
+                taccdl = QLabel(str(reports[a][2]))
                 fl.addWidget(taccdl, 2,0, alignment=left)
-                stsl = QLabel(reports[a][3])
+                stsl = QLabel("Open" if str(reports[a][3]) == "1" else "Closed")
                 fl.addWidget(stsl, 3,0, alignment=left)
+
+
+        def get_reports(self):
+            result = []
+            send_packet(client, {"type":"view_reports"})
+            result = recv_packet(client)
+            return result["reports"]
+
     def myreports(self):
+        self.myreportsframe.display_reports()
         self.myreportsframe.show()
         self.reportframe.hide()
     
@@ -393,6 +404,7 @@ class loginframe(QFrame):
             print(f"username: {uname}")
             print(f"password: {passwd}")
             send_packet(client, {"type":"login_details","uname":uname,"passwd":passwd})
+            recv_packet(client)
             self.uentry.clear()
             self.pentry.clear()
 
@@ -407,7 +419,3 @@ class loginframe(QFrame):
 
 app = App()
 app.exec()
-
-
-
-# End Line
