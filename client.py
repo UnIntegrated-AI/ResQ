@@ -194,6 +194,7 @@ class mainframe(QFrame):
         rptfl.setRowStretch(0,1)
         rptfl.setRowStretch(1,1)
         rptfl.setRowStretch(2,1)
+        #new line
         rptfl.setRowStretch(3,1)
 
         styl = "margin: 30 100;"
