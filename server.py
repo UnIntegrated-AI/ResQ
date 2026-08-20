@@ -15,6 +15,7 @@ server.listen()
 
 clients = []
 userids = [] 
+crew = []
 
 conn = mysql.connect(
     host = SERVER_HOST,
@@ -28,6 +29,12 @@ cursor.execute("create database if not exists resq")
 cursor.execute("use resq")
 cursor.execute("create table if not exists users(uid int primary key, uname varchar(50) not null, passwd varchar(50) not null, crew bool not null default false)")
 cursor.execute("create table if not exists reports(report_id int auto_increment primary key, uid int not null, location varchar(100) not null, npa varchar(100) not null, taccd varchar(100) not null, status bool not null default true)")
+
+def append_crew():
+    cursor.execute("select uid where crew = True")
+    members = cursor.fetchall()
+    for i in members:
+        crew.append(i[0])
 
 def reg_login(uname, passwd):
     cursor.execute("select * from users where uname = %s and passwd = %s",(uname, passwd))
@@ -88,6 +95,17 @@ def fetch_reports(uid):
     reports = cursor.fetchall()
     return reports
 
+def broadcast(coords):
+    for uid in crew:
+        index = userids.index(uid)
+        crew_socket = clients[index]
+        if crew_socket:
+            try:
+                send_packet(crew_socket, {"type":"coords", "coords":coords})
+            except:
+                clients.pop(index)
+
+
 def handle(client, uid):
     try:
         while True:
@@ -103,6 +121,12 @@ def handle(client, uid):
             elif packet_type == "view_reports":
                 reports = fetch_reports(uid)
                 send_packet(client, {"type":"reports", "reports":reports})
+            elif packet_type == "coordinates":
+                latitude = packet["latitude"]
+                longitude = packet["longitude"]
+                approx = packet["approx"]
+                coords = [latitude, longitude, approx]
+                broadcast(coords)
     except Exception as e:
         print(e)
         traceback.print_exc()
@@ -134,6 +158,7 @@ def recv():
                 userids.append(uid)
                 print(clients)
                 print(userids)
+                print(crew)
                 handle_thread = threading.Thread(target=handle, args=(client, uid), daemon=True)
                 handle_thread.start()
             elif result[0] == "register_success":
@@ -143,6 +168,7 @@ def recv():
                 userids.append(uid)
                 print(clients)
                 print(userids)
+                print(crew)
                 handle_thread = threading.Thread(target=handle, args=(client, uid), daemon=True)
                 handle_thread.start()
         except Exception as e:

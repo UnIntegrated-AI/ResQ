@@ -3,8 +3,10 @@ import socket
 import json
 import csv
 from PySide6.QtWidgets import QApplication, QWidget, QLabel, QGridLayout, QFrame, QLineEdit , QPushButton, QComboBox, QSpinBox, QScrollArea
-from PySide6.QtCore import Qt, QUrl
+from PySide6.QtCore import Qt
 
+import asyncio
+from winrt.windows.devices.geolocation import Geolocator, PositionAccuracy, GeolocationAccessStatus
 
 HOST = "127.0.0.1"
 PORT = 4848
@@ -16,6 +18,35 @@ centre = Qt.AlignmentFlag.AlignCenter
 top = Qt.AlignmentFlag.AlignTop
 bottom = Qt.AlignmentFlag.AlignBottom
 left = Qt.AlignmentFlag.AlignLeft
+
+async def get_location():
+    # Ask Windows for permission
+    access = await Geolocator.request_access_async()
+
+    if access != GeolocationAccessStatus.ALLOWED:
+        print("Location permission denied:", access)
+        return
+
+    # Create location provider
+    locator = Geolocator()
+
+    # Ask for high accuracy
+    locator.desired_accuracy = PositionAccuracy.HIGH
+
+    # Get current position
+    position = await locator.get_geoposition_async()
+
+    coordinate = position.coordinate
+
+    print("Latitude :", coordinate.latitude)
+    print("Longitude:", coordinate.longitude)
+    print("Accuracy :", coordinate.accuracy, "meters")
+
+    coords = [coordinate.latitude, coordinate.longitude, coordinate.accuracy]
+
+    return coords
+
+
 
 def recv_exact(sock, size):
     data = b""
@@ -103,6 +134,7 @@ class maincontainer(QFrame):
 class mainframe(QFrame):
     def __init__(self, parent):
         super().__init__(parent)
+       
 
         self.lmf = QGridLayout(self)
 
@@ -201,14 +233,15 @@ class mainframe(QFrame):
             location_heading = QLabel("Location of Incident")
             rptfl.addWidget(location_heading, 0,0)
 
-            self.location_combo = QComboBox(self)
-            with open("accident_prone_areas.csv","r") as f:
-                reader = csv.reader(f)
-                next(reader)
-            # reader = ["hello", "world", "wow","nice"]
-                for row in reader:
-                    self.location_combo.addItem(row[1])
-            rptfl.addWidget(self.location_combo, 0,1)
+            # self.location_combo = QComboBox(self)
+            # with open("accident_prone_areas.csv","r") as f:
+            #     reader = csv.reader(f)
+            #     next(reader)
+            # # reader = ["hello", "world", "wow","nice"]
+            #     for row in reader:
+            #         self.location_combo.addItem(row[1])
+            # rptfl.addWidget(self.location_combo, 0,1)
+            
 
             #no. of pepole affected thing 
             npa_heading = QLabel("No. of people affected")
@@ -237,11 +270,11 @@ class mainframe(QFrame):
             report_btn.clicked.connect(self.report_func)
 
         def report_func(self):
-            location = self.location_combo.currentText()
+            coords = asyncio.run(get_location())
             npa = self.npa.value()
             taccd = self.taccd.currentText()
-            send_packet(client, {"type":"new_report","location":location,"npa":npa,"taccd":taccd})
-            print(f"location:{location}\nno. of pepole affected:{npa}\ntype of incident:{taccd}")
+            send_packet(client, {"type":"new_report","location":coords,"npa":npa,"taccd":taccd})
+            print(f"location:{coords}\nno. of pepole affected:{npa}\ntype of incident:{taccd}")
   
     def report(self): 
         self.myreportsframe.hide()
@@ -410,11 +443,6 @@ class loginframe(QFrame):
             self.pentry.clear()
 
             self.hide()
-            if crew:
-                # maincontainer
-                pass
-            else:
-                pass
             mc = maincontainer(self.parent)
             self.layoutapp.addWidget(mc, 0, 0)
         else:
