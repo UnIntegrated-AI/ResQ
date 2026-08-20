@@ -107,7 +107,7 @@ class mainframe(QFrame):
         self.lmf.setRowStretch(1,1)
 
         self.reportframe = self.reportf(self)
-        self.lmf.addWidget(self.reportframe,1,0)
+        self.lmf.addWidget(self.reportframe,1,0) 
         self.reportframe.hide() 
 
         self.myreportsframe = self.myreportsf(self)
@@ -220,12 +220,14 @@ class mainframe(QFrame):
     class myreportsf(QScrollArea):  
         def __init__(self,parent):
             super().__init__(parent)
+            self.widget = QWidget()
+            self.setWidget(self.widget)
 
-            self.widgetResizable(False)
-            self.horizontalScrollBarPolicy(False)
+            self.setWidgetResizable(True) 
+            # self.horizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
 
-            self.setStyleSheet("""
-                QFrame{ 
+            self.setStyleSheet(""" 
+                QFrame{  
                     backgroud-color:red;
                     border: 1px solid black
                 }
@@ -233,15 +235,15 @@ class mainframe(QFrame):
                     color: black;
                     font-size: 11px;
                     font-weight: bold;
-                }
+                } 
                 """)
             
-            mrl = QGridLayout(self)
+            mrl = QGridLayout(self.widget)
 
             reports = [["vikaspuri", "3", "road accident", "open"],["uttam nagar"," 1", "road accident", "closed"],["vikaspuri", "3", "road accident", "open"],["uttam nagar"," 1", "road accident", "closed"],["vikaspuri", "3", "road accident", "open"],["uttam nagar"," 1", "road accident", "closed"],["vikaspuri", "3", "road accident", "open"],["uttam nagar"," 1", "road accident", "closed"]]
 
             for a in range(len(reports)):
-                rf = QFrame(self)
+                rf = QFrame(self.widget)
                 mrl.addWidget(rf,a,0)
                 fl = QGridLayout(rf)
                 locl = QLabel(reports[a][0])
