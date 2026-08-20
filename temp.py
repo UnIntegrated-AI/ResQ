@@ -211,6 +211,14 @@ class mainframe(QFrame):
         def __init__(self,parent):
             super().__inti__(parent)
             
+            mrl = QGridLayout(self)
+
+            reports = []
+
+            for a in range(len(reports)):
+                rf = QFrame(self)
+                mrl.addWidget(rf,a,0)
+            
     
 class loginframe(QFrame):
     def __init__(self, parent, layoutapp):
