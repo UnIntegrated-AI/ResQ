@@ -190,9 +190,7 @@ class mainframe(QFrame):
             rptfl.addWidget(report_btn,3,0,1,2,alignment=Qt.AlignmentFlag.AlignHCenter) 
             report_btn.clicked.connect(self.report_func)
 
-
-
-        def report_func(self):
+        def report_func(self): 
             location = self.location_combo.currentText()
             npa = self.npa.value()
             taccd = self.taccd.currentText()
@@ -316,7 +314,6 @@ class loginframe(QFrame):
             print("Enter Username and Password")
             return
 
-#hello
 
 app = App()
 app.exec()
