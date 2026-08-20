@@ -81,6 +81,7 @@ class loginframe(QFrame):
                         font-weight: bold;
                     }
         
+                    
                     QPushButton:hover {
                         background-color: #B91C1C;
                     }
