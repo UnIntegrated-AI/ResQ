@@ -55,7 +55,7 @@ class maincontainer(QFrame):
         lmc.addWidget(udf,0,1)
         mff = mainframe(self)
         lmc.addWidget(mff,0,0)
-
+ 
         lmc.setColumnStretch(0,3)
         lmc.setColumnStretch(1,1)
 
@@ -148,7 +148,7 @@ class mainframe(QFrame):
 
         # type of accident thing
         taccd_heading = QLabel("Type of Incident") 
-        rptfl.addWidget(taccd_heading, 2,0)
+        rptfl.addWidget(taccd_heading, 2,0) 
 
         type_of_accidents = ["Road Accident", "Landslide", "Fuel", "Motor support"]
 
