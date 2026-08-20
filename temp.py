@@ -252,9 +252,7 @@ class loginframe(QFrame):
         uname = self.uentry.text().strip()
         passwd = self.pentry.text()
 
-        if True:
-            print("Enter username and password.")
-            # return
+        if uname and passwd:
 
             print(f"username: {uname}")
             print(f"password: {passwd}")
@@ -266,6 +264,9 @@ class loginframe(QFrame):
 
             mc = maincontainer(self.parent)
             self.layoutapp.addWidget(mc, 0, 0)
+        else:
+            print("Enter Username and Password")
+            return
 
 #hello
 
