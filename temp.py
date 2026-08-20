@@ -66,10 +66,7 @@ class mainframe(QFrame):
         self.lmf = QGridLayout(self)
 
         self.setStyleSheet("""
-            QFrame{
-                background-color: whitesmoke;
-            }
-            QPushButton#Report_nav{
+            QPushButton{
                 background-color: #DC2626;
                 color: white;
                 border: none;
@@ -91,6 +88,7 @@ class mainframe(QFrame):
         ncl.addWidget(report_btn,0,0)
 
         yreports_btn = QPushButton("My Reports", nav_container)
+        report_btn.setObjectName("my_reports")
         ncl.addWidget(yreports_btn,0,1)
 
 
@@ -110,6 +108,21 @@ class mainframe(QFrame):
 
         rptfl.setColumnStretch(0,3)
         rptfl.setColumnStretch(1,5)
+
+        self.setStyleSheet("""
+            QFrame{
+                background-color: whitesmoke;
+            }
+            QPushButton{
+                background-color: #DC2626;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                padding: 11px;
+                font-size: 15px;
+                font-weight: bold;
+            }
+        """)
 
         #Location thing
         location_heading = QLabel("Location of Incident")
