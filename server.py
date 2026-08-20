@@ -79,6 +79,10 @@ def handle(client, uid):
             if not packet:
                 None
             packet_type = packet["type"]
+            if packet_type == "new_report":
+                pass
+            elif packet_type == "view_records":
+                pass
     except:
         if client in clients:
             index = clients.index(client)
@@ -99,7 +103,7 @@ def recv():
             passwd = login_data["passwd"]
             print(f"uname:  {uname}\npasswd:  {passwd}")
             result = reg_login(uid, uname, passwd)
-            send_packet(client, {"type":result})
+            send_packet(client, {"type":result,"uid":uid})
             uid = random_id()
             clients.append(client)
             userids.append(uid)
