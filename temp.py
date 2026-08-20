@@ -212,7 +212,7 @@ class mainframe(QFrame):
             taccd = self.taccd.currentText()
 
             print(f"location:{location}\nno. of pepole affected:{npa}\ntype of incident:{taccd}")
- 
+  
     def report(self):
         self.myreportsframe.hide()
         self.reportframe.show()
@@ -223,7 +223,7 @@ class mainframe(QFrame):
             
             mrl = QGridLayout(self)
 
-            reports = [["vikaspuri", 3, "road accident", "opened"],["uttam nagar", 1, "road accident", "closed"]]
+            reports = [["vikaspuri", "3", "road accident", "opened"],["uttam nagar"," 1", "road accident", "closed"]]
 
             for a in range(len(reports)):
                 rf = QFrame(self)
