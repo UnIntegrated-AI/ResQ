@@ -36,13 +36,19 @@ class user_details(QFrame):
 
         self.setStyleSheet("""
             QFrame{
+                background-color: whitesmoke;
+                color: black;
+                border: 1px solid #DC2626;
+                border-radius: 8px;
+                padding: 11px;
+            }
+            QLabel{
+                border: none;
             }
         """)
-
-        l = QLabel("userdetails")
-        
+        l = QLabel("Username")        
         lud = QGridLayout(self)
-        lud.addWidget(l)
+        lud.addWidget(l,0,0, alignment=centre)
 
 class maincontainer(QFrame):
     def __init__(self, parent):
@@ -79,7 +85,7 @@ class mainframe(QFrame):
 
         nav_container = QFrame(self)
         ncl = QGridLayout(nav_container)
-        nav_container.setStyleSheet("QFrame{border: 1px solid orange;}")
+        nav_container.setStyleSheet("QFrame{border: 1px solid #DC2626; border-radius: 8px;}")
         self.lmf.addWidget(nav_container,0,0, alignment=top)
 
         report_btn = QPushButton("Report an Accident", nav_container)
