@@ -11,7 +11,7 @@ centre = Qt.AlignmentFlag.AlignCenter
 top = Qt.AlignmentFlag.AlignTop
 bottom = Qt.AlignmentFlag.AlignBottom
 left = Qt.AlignmentFlag.AlignLeft
-x = Qt.AlignmentFlag(0)
+default = Qt.AlignmentFlag(0)
 
 class App(QApplication):
     def __init__(self):
@@ -97,7 +97,7 @@ class mainframe(QFrame):
                 location_combo.addItem(row)
         result = location_combo.currentText()
         print(result)
-        rptfl.addWidget(location_combo, 0,0, alignment=centre)
+        rptfl.addWidget(location_combo, 0,0, alignment=centre | default)
 
         
         
