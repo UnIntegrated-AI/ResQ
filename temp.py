@@ -47,6 +47,7 @@ class user_details(QFrame):
 class maincontainer(QFrame):
     def __init__(self, parent):
         super().__init__(parent)
+        self.setStyleSheet("background-color: whitesmoke;")
 
         lmc = QGridLayout(self)
 
@@ -68,7 +69,13 @@ class mainframe(QFrame):
                 background-color: whitesmoke;
             }
             QPushButton#Report_nav{
-                background-color: whitesmoke;
+                background-color: #DC2626;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                padding: 11px;
+                font-size: 15px;
+                font-weight: bold;
             }
         """)
 
@@ -102,7 +109,6 @@ class mainframe(QFrame):
 
         rptfl.setColumnStretch(0,3)
         rptfl.setColumnStretch(1,5)
- 
 
         #Location thing
         location_heading = QLabel("Location of Incident")
