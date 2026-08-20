@@ -35,7 +35,7 @@ class user_details(QFrame):
 
         self.setStyleSheet("""
             QFrame{
-                background-color: #f8f8ba;
+                background-color: #fff2cc;
                 color: black;
                 border: 1px solid #DC2626;
                 border-radius: 8px;
@@ -52,7 +52,7 @@ class user_details(QFrame):
 class maincontainer(QFrame):
     def __init__(self, parent):
         super().__init__(parent)
-        self.setStyleSheet("background-color: #f8f8ba;")
+        self.setStyleSheet("background-color: #fff2cc;")
 
         lmc = QGridLayout(self)
 
@@ -112,7 +112,7 @@ class mainframe(QFrame):
             rptfl = QGridLayout(self)
 
             rptfl.setRowStretch(0,1)
-            rptfl.setRowStretch(1,1)
+            rptfl.setRowStretch(1,1) 
             rptfl.setRowStretch(2,1)
  
             rptfl.setColumnStretch(0,3)
@@ -122,7 +122,7 @@ class mainframe(QFrame):
             QFrame{
                 border: 1px solid #DC2626;
                 border-radius: 8px;
-                background-color: #f8f8ba;
+                background-color: #fff2cc;
                 color: black
             }
             QPushButton{
@@ -135,7 +135,7 @@ class mainframe(QFrame):
                 font-weight: bold;
             }
             QSpinBox{
-                background-color: #f8f8ba;
+                background-color: #fff2cc;
                 color: black;
                 border: 1px solid #D1D5DB;
                 border-radius: 8px;
@@ -143,7 +143,7 @@ class mainframe(QFrame):
                 font-size: 14px;
             }
             QComboBox{
-                background-color: #f8f8ba;
+                background-color: #fff2cc;
                 color: black;
                 border: 1px solid #D1D5DB;
                 border-radius: 8px;
@@ -221,7 +221,7 @@ class loginframe(QFrame):
 
         self.setStyleSheet("""
             QFrame {
-                background-color: #f8f8ba;
+                background-color: #fff2cc;
             }
 
             QLabel#title {
@@ -236,7 +236,7 @@ class loginframe(QFrame):
             }
 
             QLineEdit {
-                background-color: #f8f8ba;
+                background-color: #fff2cc;
                 color: #172033;
                 border: 1px solid #D1D5DB;
                 border-radius: 8px;
