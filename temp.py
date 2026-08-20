@@ -4,7 +4,7 @@ import json
 import csv
 from PySide6.QtWidgets import QApplication, QWidget, QLabel, QGridLayout, QFrame, QLineEdit , QPushButton, QComboBox, QSpinBox, QScrollArea
 from PySide6.QtCore import Qt
-
+import webbrowser
 import asyncio
 from winrt.windows.devices.geolocation import Geolocator, PositionAccuracy, GeolocationAccessStatus
 
@@ -18,6 +18,9 @@ centre = Qt.AlignmentFlag.AlignCenter
 top = Qt.AlignmentFlag.AlignTop
 bottom = Qt.AlignmentFlag.AlignBottom
 left = Qt.AlignmentFlag.AlignLeft
+
+def open_map(lat, lon):
+    webbrowser.open(f"https://google.com/maps?q={lat},{lon}")
 
 async def get_location():
     # Ask Windows for permission
@@ -454,5 +457,3 @@ app = App()
 app.exec()
 
 
-
-# End Line
