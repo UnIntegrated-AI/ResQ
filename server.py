@@ -36,14 +36,14 @@ def append_crew():
     for i in members:
         crew.append(i[0])
 
-def reg_login(uname, passwd):
+def reg_login(uname, passwd, crew):
     cursor.execute("select * from users where uname = %s and passwd = %s",(uname, passwd))
     result = cursor.fetchone()
     if result:
         return ["login_success", result[0], result[-1]]
     else:
         uid = random_id()
-        cursor.execute("insert into users values(%s ,%s ,%s )",(uid, uname, passwd))
+        cursor.execute("insert into users(uid, uname, passwd, crew) values(%s ,%s ,%s, %s)",(uid, uname, passwd, crew))
         conn.commit()
         return ["register_success", uid, result[-1]]
 
@@ -149,8 +149,9 @@ def recv():
                     break
             uname = login_data["uname"]
             passwd = login_data["passwd"]
+            crew = login_data["crew"]
             print(f"uname:  {uname}\npasswd:  {passwd}")
-            result = reg_login(uname, passwd)
+            result = reg_login(uname, passwd, crew)
             if result[0] == "login_success":
                 uid = result[1]
                 send_packet(client, {"type":result[0], "uid":uid, "crew":result[-1]})

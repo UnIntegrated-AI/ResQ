@@ -436,7 +436,7 @@ class loginframe(QFrame):
 
             print(f"username: {uname}")
             print(f"password: {passwd}")
-            send_packet(client, {"type":"login_details","uname":uname,"passwd":passwd})
+            send_packet(client, {"type":"login_details","uname":uname,"passwd":passwd, "crew":crew})
             packet = recv_packet(client)
             crew = packet["crew"]
             self.uentry.clear()
