@@ -96,8 +96,8 @@ class mainframe(QFrame):
         self.lmf.setRowStretch(0,0)
         self.lmf.setRowStretch(1,1)
 
-        self.reportframe = self.reportf()
-
+        self.reportframe = self.reportf(self)
+ 
     class reportf(QFrame):
         def __init__(self,parent):
             super().__init__(parent)
