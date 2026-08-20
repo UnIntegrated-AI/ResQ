@@ -221,8 +221,11 @@ class mainframe(QFrame):
         def __init__(self,parent):
             super().__init__(parent)
 
+            self.widgetResizable(False)
+            self.horizontalScrollBarPolicy(False)
+
             self.setStyleSheet("""
-                QFrame{
+                QFrame{ 
                     backgroud-color:red;
                     border: 1px solid black
                 }
@@ -235,7 +238,7 @@ class mainframe(QFrame):
             
             mrl = QGridLayout(self)
 
-            reports = [["vikaspuri", "3", "road accident", "open"],["uttam nagar"," 1", "road accident", "closed"],["vikaspuri", "3", "road accident", "open"],["uttam nagar"," 1", "road accident", "closed"]]
+            reports = [["vikaspuri", "3", "road accident", "open"],["uttam nagar"," 1", "road accident", "closed"],["vikaspuri", "3", "road accident", "open"],["uttam nagar"," 1", "road accident", "closed"],["vikaspuri", "3", "road accident", "open"],["uttam nagar"," 1", "road accident", "closed"],["vikaspuri", "3", "road accident", "open"],["uttam nagar"," 1", "road accident", "closed"]]
 
             for a in range(len(reports)):
                 rf = QFrame(self)
