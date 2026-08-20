@@ -107,11 +107,11 @@ class mainframe(QFrame):
         self.lmf.setRowStretch(1,1)
 
         self.reportframe = self.reportf(self)
-        self.lmf.addWidget(self.reportframe,1,0,alignment=centre)
+        self.lmf.addWidget(self.reportframe,1,0)
         self.reportframe.hide() 
 
         self.myreportsframe = self.myreportsf(self)
-        self.lmf.addWidget(self.myreportsframe,1,0,alignment=centre)
+        self.lmf.addWidget(self.myreportsframe,1,0)
         self.myreportsframe.hide()
    
     class reportf(QFrame): 
@@ -214,7 +214,7 @@ class mainframe(QFrame):
             print(f"location:{location}\nno. of pepole affected:{npa}\ntype of incident:{taccd}")
   
     def report(self): 
-        self.myreportsframe.hide()
+        self.myreportsframe.hide() 
         self.reportframe.show()
 
     class myreportsf(QScrollArea):  
