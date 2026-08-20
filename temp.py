@@ -86,34 +86,47 @@ class mainframe(QFrame):
         rptfl.setRowStretch(0,1)
         rptfl.setRowStretch(1,1)
         rptfl.setRowStretch(2,1)
-        # rptfl.setRowStretch(3,1)
+
+        rptfl.setColumnStretch(0,1)
+        rptfl.setColumnStretch(1,3)
 
         styl = "margin: 30 100;" 
+ 
 
+        #Location thing
         location_heading = QLabel("Location of Incident")
-        rptfl.addItem(location_heading, 0,0)
+        rptfl.addWidget(location_heading, 0,0)
 
         location_combo = QComboBox(reportf)
-        reader = ["hello", "world"]
+        reader = ["hello", "world"]  
         for row in reader:
             if row:
                 location_combo.addItem(row)
         rptfl.addWidget(location_combo, 0,1)
 
-        
+        #no. of pepole affected thing
+        npa_heading = QLabel("No. of people affected")
+        rptfl.addWidget(npa_heading, 1,0)
         
         npa = QSpinBox(reportf)
-        npa.setMinimum(1)
+        npa.setMinimum(1) 
         npa.setMaximum(100)
-        rptfl.addWidget(npa, 1,0)
+        rptfl.addWidget(npa, 1,1)
 
+        # type of accident thing
+        taccd_heading = QLabel("Type of Incident")
+        rptfl.addWidget(taccd_heading, 2,0)
 
         type_of_accidents = ["Road Accident", "Landslide", "Fuel", "Motor support"]
 
         taccd = QComboBox(reportf)
         for a in type_of_accidents:
             taccd.addItem(a)
-        rptfl.addWidget(taccd, 2,0)
+        rptfl.addWidget(taccd, 2,1)
+
+        # submit button
+
+        report_btn = QPushButton()
 
     def open_map(self):
 
@@ -199,27 +212,33 @@ class loginframe(QFrame):
         layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.setVerticalSpacing(12)
 
+        # Title
         title = QLabel("ResQ")
         title.setObjectName("title")
         title.setAlignment(centre)
 
+        # Subtitle
         subtitle = QLabel("Emergency Response & Reporting")
         subtitle.setObjectName("subtitle")
         subtitle.setAlignment(centre)
 
+        # Username
         self.uentry = QLineEdit()
         self.uentry.setPlaceholderText("Username")
         self.uentry.setFixedSize(350, 45)
 
+        # Password
         self.pentry = QLineEdit()
         self.pentry.setPlaceholderText("Password")
         self.pentry.setEchoMode(QLineEdit.EchoMode.Password)
         self.pentry.setFixedSize(350, 45)
 
+        # Login button
         btn = QPushButton("LOGIN")
         btn.setFixedSize(350, 45)
         btn.clicked.connect(self.login_btn)
 
+        # Layout
         layout.addWidget(title, 0, 0)
         layout.addWidget(subtitle, 1, 0)
         layout.setSpacing(15)
