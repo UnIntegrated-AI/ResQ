@@ -7,7 +7,7 @@ from PySide6.QtCore import Qt, QUrl
 
 
 HOST = "127.0.0.1"
-PORT = 4848    
+PORT = 4848
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect((HOST,PORT))
@@ -280,13 +280,13 @@ class mainframe(QFrame):
                 rf = QFrame(self.widget)
                 self.mrl.addWidget(rf,a,0)
                 fl = QGridLayout(rf)
-                locl = QLabel(f"Location of Incident:\t{str(reports[a][0])}")
+                locl = QLabel(str(reports[a][0]))
                 fl.addWidget(locl, 0,0, alignment=left)
-                npal = QLabel(f"Number of People affected:\t{str(reports[a][1])}")
+                npal = QLabel(str(reports[a][1]))
                 fl.addWidget(npal, 1,0, alignment=left)
-                taccdl = QLabel(f"Type of Incident{str(reports[a][2])}")
+                taccdl = QLabel(str(reports[a][2]))
                 fl.addWidget(taccdl, 2,0, alignment=left)
-                stsl = QLabel("Status:\tOpen" if str(reports[a][3]) == "1" else "Status:\tClosed")
+                stsl = QLabel("Open" if str(reports[a][3]) == "1" else "Closed")
                 fl.addWidget(stsl, 3,0, alignment=left)
 
 
@@ -404,12 +404,17 @@ class loginframe(QFrame):
             print(f"username: {uname}")
             print(f"password: {passwd}")
             send_packet(client, {"type":"login_details","uname":uname,"passwd":passwd})
-            recv_packet(client)
+            packet = recv_packet(client)
+            crew = packet["crew"]
             self.uentry.clear()
             self.pentry.clear()
 
             self.hide()
-
+            if crew:
+                # maincontainer
+                pass
+            else:
+                pass
             mc = maincontainer(self.parent)
             self.layoutapp.addWidget(mc, 0, 0)
         else:
@@ -419,3 +424,7 @@ class loginframe(QFrame):
 
 app = App()
 app.exec()
+
+
+
+# End Line

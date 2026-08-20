@@ -26,19 +26,19 @@ cursor = conn.cursor(buffered=True)
 
 cursor.execute("create database if not exists resq")
 cursor.execute("use resq")
-cursor.execute("create table if not exists users(uid int primary key, uname varchar(50) not null, passwd varchar(50) not null)")
+cursor.execute("create table if not exists users(uid int primary key, uname varchar(50) not null, passwd varchar(50) not null, crew bool not null default false)")
 cursor.execute("create table if not exists reports(report_id int auto_increment primary key, uid int not null, location varchar(100) not null, npa varchar(100) not null, taccd varchar(100) not null, status bool not null default true)")
 
 def reg_login(uname, passwd):
     cursor.execute("select * from users where uname = %s and passwd = %s",(uname, passwd))
     result = cursor.fetchone()
     if result:
-        return ["login_success", result[0]]
+        return ["login_success", result[0], result[-1]]
     else:
         uid = random_id()
         cursor.execute("insert into users values(%s ,%s ,%s )",(uid, uname, passwd))
         conn.commit()
-        return ["register_success", uid]
+        return ["register_success", uid, result[-1]]
 
 
 def recv_exact(sock, size):
@@ -129,7 +129,7 @@ def recv():
             result = reg_login(uname, passwd)
             if result[0] == "login_success":
                 uid = result[1]
-                send_packet(client, {"type":result[0],"uid":uid})
+                send_packet(client, {"type":result[0], "uid":uid, "crew":result[-1]})
                 clients.append(client)
                 userids.append(uid)
                 print(clients)
@@ -138,7 +138,7 @@ def recv():
                 handle_thread.start()
             elif result[0] == "register_success":
                 uid = result[1]
-                send_packet(client, {"type":result[0],"uid":uid})
+                send_packet(client, {"type":result[0], "uid":uid, "crew":result[-1]})
                 clients.append(client)
                 userids.append(uid)
                 print(clients)
