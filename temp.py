@@ -109,7 +109,7 @@ class mainframe(QFrame):
     class reportf(QFrame):
         def __init__(self,parent):
             super().__init__(parent)
-            self.setStyleSheet("QFrame{border: 1px solid orange;}")
+            self.setStyleSheet("QFrame{border: 1px solid #DC2626; border-radius: 8px;}")
             rptfl = QGridLayout(self)
 
             rptfl.setRowStretch(0,1)
@@ -120,19 +120,36 @@ class mainframe(QFrame):
             rptfl.setColumnStretch(1,5)
 
             self.setStyleSheet("""
-                QFrame{
-                    background-color: whitesmoke;
-                }
-                QPushButton{
-                    background-color: #DC2626;
-                    color: white;
-                    border: none;
-                    border-radius: 8px;
-                    padding: 11px;
-                    font-size: 15px;
-                    font-weight: bold;
-                }
-            """)
+            QFrame{
+                background-color: whitesmoke;
+                color: black;
+            }
+            QPushButton{
+                background-color: #DC2626;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                padding: 11px;
+                font-size: 15px;
+                font-weight: bold;
+            }
+            QSpinBox{
+                background-color: white;
+                color: #172033;
+                border: 1px solid #D1D5DB;
+                border-radius: 8px;
+                padding: 10px;
+                font-size: 14px;
+            }
+            QComboBox{
+                background-color: white;
+                color: #172033;
+                border: 1px solid #D1D5DB;
+                border-radius: 8px;
+                padding: 10px;
+                font-size: 14px;
+            }
+         """)
 
             #Location thing
             location_heading = QLabel("Location of Incident")
