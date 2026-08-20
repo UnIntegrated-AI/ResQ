@@ -115,23 +115,23 @@ class mainframe(QFrame):
         location_heading = QLabel("Location of Incident")
         rptfl.addWidget(location_heading, 0,0)
 
-        location_combo = QComboBox(reportf)
+        self.location_combo = QComboBox(reportf)
         # with open(r"C:\Users\yadav\OneDrive\Desktop\Ansh\New folder\Accident Prone Areas\accident_prone_areas.csv","r") as f:
         #     reader = csv.reader(f)
         #     next(reader)
         reader = ["hello", "world", "wow","nice"]
         for row in reader:
-            location_combo.addItem(row)
-        rptfl.addWidget(location_combo, 0,1)
+            self.location_combo.addItem(row)
+        rptfl.addWidget(self.location_combo, 0,1)
  
         #no. of pepole affected thing 
         npa_heading = QLabel("No. of people affected")
         rptfl.addWidget(npa_heading, 1,0)
         
-        npa = QSpinBox(reportf)
-        npa.setMinimum(1) 
-        npa.setMaximum(100) 
-        rptfl.addWidget(npa, 1,1)
+        self.npa = QSpinBox(reportf)
+        self.npa.setMinimum(1) 
+        self.npa.setMaximum(100) 
+        rptfl.addWidget(self.npa, 1,1)
 
         # type of accident thing
         taccd_heading = QLabel("Type of Incident") 
@@ -139,10 +139,10 @@ class mainframe(QFrame):
 
         type_of_accidents = ["Road Accident", "Landslide", "Fuel", "Motor support"]
 
-        taccd = QComboBox(reportf)
+        self.taccd = QComboBox(reportf)
         for a in type_of_accidents: 
-            taccd.addItem(a)
-        rptfl.addWidget(taccd, 2,1) 
+            self.taccd.addItem(a)
+        rptfl.addWidget(self.taccd, 2,1) 
 
         # submit button
 
