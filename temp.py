@@ -112,6 +112,7 @@ class mainframe(QFrame):
         self.setStyleSheet("""
             QFrame{
                 background-color: whitesmoke;
+                color: black;
             }
             QPushButton{
                 background-color: #DC2626;
@@ -121,6 +122,22 @@ class mainframe(QFrame):
                 padding: 11px;
                 font-size: 15px;
                 font-weight: bold;
+            }
+            QSpinBox{
+                background-color: white;
+                color: #172033;
+                border: 1px solid #D1D5DB;
+                border-radius: 8px;
+                padding: 10px;
+                font-size: 14px;
+            }
+            QComboBox{
+                background-color: white;
+                color: #172033;
+                border: 1px solid #D1D5DB;
+                border-radius: 8px;
+                padding: 10px;
+                font-size: 14px;
             }
         """)
 
