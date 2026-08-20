@@ -1,7 +1,7 @@
 import socket
 import json
 import csv
-from PySide6.QtWidgets import QApplication, QWidget, QLabel, QGridLayout, QFrame, QLineEdit , QPushButton, QDialog, QVBoxLayout, QComboBox, QSpinBox
+from PySide6.QtWidgets import QApplication, QWidget, QLabel, QGridLayout, QFrame, QLineEdit , QPushButton, QDialog, QVBoxLayout, QComboBox, QSpinBox, QScrollArea
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtCore import Qt, QUrl
 
@@ -232,11 +232,11 @@ class mainframe(QFrame):
             taccd = self.taccd.currentText()
 
             print(f"location:{location}\nno. of pepole affected:{npa}\ntype of incident:{taccd}")
-
+ 
     def report(self):
         self.reportframe.show()
 
-    class myreportsf(QFrame):
+    class myreportsf(QScrollArea): 
         def __init__(self,parent):
             super().__inti__(parent)
             
@@ -247,6 +247,15 @@ class mainframe(QFrame):
             for a in range(len(reports)):
                 rf = QFrame(self)
                 mrl.addWidget(rf,a,0)
+                fl = QGridLayout(rf)
+                locl = QLabel(reports[a][0])
+                fl.addWidget(locl, 0,0, alignment=left)
+                npal = QLabel(reports[a][1])
+                fl.addWidget(npal, 1,0, alignment=left)
+                taccdl = QLabel(reports[a][2])
+                fl.addWidget(taccdl, 2,0, alignment=left)
+                stsl = QLabel(reports[a][3])
+                fl.addWidget(stsl, 3,0, alignment=left)
             
     
 class loginframe(QFrame):
