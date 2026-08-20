@@ -10,13 +10,44 @@ from PySide6.QtCore import Qt, QUrl
 HOST = "127.0.0.1"
 PORT = 4848
 
-# client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# client.bind((HOST,PORT))
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.bind((HOST,PORT))
 
 centre = Qt.AlignmentFlag.AlignCenter
 top = Qt.AlignmentFlag.AlignTop
 bottom = Qt.AlignmentFlag.AlignBottom
 left = Qt.AlignmentFlag.AlignLeft
+
+def recv_exact(sock, size):
+    data = b""
+    while len(data) < size:
+        chunk = sock.recv(size - len(data))
+        if not chunk:
+            return None
+        data += chunk
+    return data
+
+
+def send_packet(sock, packet):
+    data = json.dumps(packet).encode()
+    length = len(data).to_bytes(4, "big")
+    sock.sendall(length + data)
+
+
+def recv_packet(sock):
+    header = recv_exact(sock, 4)
+
+    if not header:
+        return None
+
+    length = int.from_bytes(header, "big")
+    data = recv_exact(sock, length)
+
+    if not data:
+        return None
+
+    return json.loads(data.decode())
+
 
 class App(QApplication):
     def __init__(self):
@@ -206,15 +237,15 @@ class mainframe(QFrame):
             rptfl.addWidget(report_btn,3,0,1,2,alignment=Qt.AlignmentFlag.AlignHCenter) 
             report_btn.clicked.connect(self.report_func)
 
-        def report_func(self): 
+        def report_func(self):
             location = self.location_combo.currentText()
             npa = self.npa.value()
             taccd = self.taccd.currentText()
-
+            send_packet(client, {"type":"new_report","location":location,"npa":npa,"taccd":taccd})
             print(f"location:{location}\nno. of pepole affected:{npa}\ntype of incident:{taccd}")
   
     def report(self): 
-        self.myreportsframe.hide() 
+        self.myreportsframe.hide()
         self.reportframe.show()
 
     class myreportsf(QScrollArea):  
@@ -222,7 +253,8 @@ class mainframe(QFrame):
             super().__init__(parent)
             self.widget = QWidget()
             self.setWidget(self.widget)
-
+            send_packet(client, {"type":"view_reports"})
+            result = recv_packet(client)
             self.setWidgetResizable(True) 
             # self.horizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff) 
 
@@ -240,7 +272,7 @@ class mainframe(QFrame):
             
             mrl = QGridLayout(self.widget)
 
-            reports = [["vikaspuri", "3", "road accident", "open"],["uttam nagar"," 1", "road accident", "closed"],["vikaspuri", "3", "road accident", "open"],["uttam nagar"," 1", "road accident", "closed"],["vikaspuri", "3", "road accident", "open"],["uttam nagar"," 1", "road accident", "closed"],["vikaspuri", "3", "road accident", "open"],["uttam nagar"," 1", "road accident", "closed"]]
+            reports = result["reports"]
 
             for a in range(len(reports)):
                 rf = QFrame(self.widget)
@@ -356,11 +388,11 @@ class loginframe(QFrame):
         uname = self.uentry.text().strip()
         passwd = self.pentry.text()
 
-        if True:
+        if uname and passwd:
 
             print(f"username: {uname}")
             print(f"password: {passwd}")
-
+            send_packet(client, {"type":"login_details","uname":uname,"passwd":passwd})
             self.uentry.clear()
             self.pentry.clear()
 

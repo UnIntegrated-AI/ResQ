@@ -26,6 +26,7 @@ cursor = conn.cursor(buffered=True)
 cursor.execute("create database if not exists resq")
 cursor.execute("use resq")
 cursor.execute("create table if not exists users(uid int primary key, uname varchar(50) not null, passwd varchar(50) not null)")
+cursor.execute("create table if not exists reports(uid int primary key, location varchar(100) not null, npa varchar(100) not null, taccd varchar(100) not null)")
 
 def reg_login(uid, uname, passwd):
     result = cursor.execute("select * from users where uid = %s and uname = %s and passwd = %s",(uid, uname, passwd))
@@ -33,6 +34,7 @@ def reg_login(uid, uname, passwd):
         return "login_success"
     else:
         cursor.execute("insert into users values(%s ,%s ,%s )",(uid, uname, passwd))
+        conn.commit()
         return "register_success"
 
 def recv_exact(sock, size):
@@ -72,6 +74,15 @@ def random_id():
 
     return num
 
+def save_report(uid, location, npa, taccd):
+    cursor.execute("insert into reports values(%s, %s, %s, %s) where uid = %s",(uid, location, npa, taccd, uid))
+    conn.commit()
+
+def fetch_reports(uid):
+    cursor.execute("select * from report where uid = %s", (uid,))
+    reports = cursor.fetchall()
+    return reports
+
 def handle(client, uid):
     try:
         while True:
@@ -80,9 +91,13 @@ def handle(client, uid):
                 None
             packet_type = packet["type"]
             if packet_type == "new_report":
-                pass
-            elif packet_type == "view_records":
-                pass
+                location = packet["location"]
+                npa = packet["npa"]
+                taccd = packet["taccd"]
+                save_report(uid,location,npa,taccd)
+            elif packet_type == "view_reports":
+                reports = fetch_reports(uid)
+                send_packet(client, {"type":"reports", "reports":reports})
     except:
         if client in clients:
             index = clients.index(client)
