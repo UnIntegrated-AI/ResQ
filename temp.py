@@ -217,7 +217,7 @@ class mainframe(QFrame):
         self.myreportsframe.hide()
         self.reportframe.show()
 
-    class myreportsf(QScrollArea): 
+    class myreportsf(QScrollArea):  
         def __init__(self,parent):
             super().__init__(parent)
 
@@ -225,7 +225,7 @@ class mainframe(QFrame):
             
             mrl = QGridLayout(self)
 
-            reports = [["vikaspuri", 3, "road accident", "open"],["uttam nagar", 1, "road accident", "closed"]]
+            reports = [["vikaspuri", "3", "road accident", "open"],["uttam nagar"," 1", "road accident", "closed"]]
 
             for a in range(len(reports)):
                 rf = QFrame(self)
