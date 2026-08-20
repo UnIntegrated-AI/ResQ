@@ -35,7 +35,7 @@ class user_details(QFrame):
 
         self.setStyleSheet("""
             QFrame{
-                background-color: whitesmoke;
+                background-color: #f8f8ba;
                 color: black;
                 border: 1px solid #DC2626;
                 border-radius: 8px;
@@ -52,7 +52,7 @@ class user_details(QFrame):
 class maincontainer(QFrame):
     def __init__(self, parent):
         super().__init__(parent)
-        self.setStyleSheet("background-color: whitesmoke;")
+        self.setStyleSheet("background-color: #f8f8ba;")
 
         lmc = QGridLayout(self)
 
@@ -120,8 +120,8 @@ class mainframe(QFrame):
 
             self.setStyleSheet("""
             QFrame{
-                border: 1px solid #DC2626;
-                border-radius: 8px;
+                background-color: #f8f8ba;
+                color: black
             }
             QPushButton{
                 background-color: #DC2626;
@@ -134,7 +134,7 @@ class mainframe(QFrame):
             }
             QSpinBox{
                 background-color: #f8f8ba;
-                color: #172033;
+                color: black;
                 border: 1px solid #D1D5DB;
                 border-radius: 8px;
                 padding: 10px;
@@ -142,7 +142,7 @@ class mainframe(QFrame):
             }
             QComboBox{
                 background-color: #f8f8ba;
-                color: #172033;
+                color: black;
                 border: 1px solid #D1D5DB;
                 border-radius: 8px;
                 padding: 10px;
