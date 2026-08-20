@@ -101,7 +101,7 @@ class mainframe(QFrame):
         yreports_btn.clicked.connect(self.myreports)
         ncl.addWidget(yreports_btn,0,1)
 
-
+ 
         ncl.setAlignment(centre|left)
         self.lmf.setRowStretch(0,0)
         self.lmf.setRowStretch(1,1)
@@ -219,7 +219,7 @@ class mainframe(QFrame):
 
     class myreportsf(QScrollArea): 
         def __init__(self,parent):
-            super().__inti__(parent)
+            super().__init__(parent)
             
             mrl = QGridLayout(self)
 
