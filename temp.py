@@ -252,6 +252,8 @@ class loginframe(QFrame):
             mc = maincontainer(self.parent)
             self.layoutapp.addWidget(mc, 0, 0)
 
+#hello
+
 app = App()
 app.exec()
 
