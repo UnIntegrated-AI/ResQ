@@ -115,14 +115,15 @@ class mainframe(QFrame):
         rptfl.addWidget(location_heading, 0,0)
 
         location_combo = QComboBox(reportf)
-        with open(r"C:\Users\yadav\OneDrive\Desktop\Ansh\New folder\Accident Prone Areas\accident_prone_areas.csv","r") as f:
-            reader = csv.reader(f)
-            next(reader)
-            for row in reader:
-                location_combo.addItem(row[1])
+        # with open(r"C:\Users\yadav\OneDrive\Desktop\Ansh\New folder\Accident Prone Areas\accident_prone_areas.csv","r") as f:
+        #     reader = csv.reader(f)
+        #     next(reader)
+        reader = ["hello", "world", "wow","nice"]
+        for row in reader:
+            location_combo.addItem(row)
         rptfl.addWidget(location_combo, 0,1)
 
-        #no. of pepole affected thing
+        #no. of pepole affected thing 
         npa_heading = QLabel("No. of people affected")
         rptfl.addWidget(npa_heading, 1,0)
         
@@ -236,7 +237,7 @@ class loginframe(QFrame):
         layout.addWidget(title, 0, 0)
         layout.addWidget(subtitle, 1, 0)
         layout.setSpacing(15)
-        layout.addWidget(self.uentry, 3, 0)
+        layout.addWidget(self.uentry, 3, 0) 
         layout.addWidget(self.pentry, 4, 0)
         layout.setSpacing(10)
         layout.addWidget(btn, 6, 0)
@@ -245,7 +246,7 @@ class loginframe(QFrame):
         uname = self.uentry.text().strip()
         passwd = self.pentry.text()
 
-        if uname and passwd:
+        if True:
 
             print(f"username: {uname}")
             print(f"password: {passwd}")
