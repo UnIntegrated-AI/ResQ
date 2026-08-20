@@ -148,6 +148,14 @@ class mainframe(QFrame):
 
         report_btn = QPushButton("Report", reportf)
         rptfl.addWidget(report_btn,3,0,1,2,alignment=Qt.AlignmentFlag.AlignHCenter) 
+        report_btn.clicked.connect(self.report_func)
+
+    def report_func(self):
+        location = self.location_combo.currentData()
+        npa = self.npa.value()
+        taccd = self.taccd.currentData()
+
+        print(f"location:{location}\nno. of pepole affected:{npa}\ntype of incident:{taccd}")
 
 class loginframe(QFrame):
     def __init__(self, parent, layoutapp):
