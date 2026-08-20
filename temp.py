@@ -11,7 +11,6 @@ centre = Qt.AlignmentFlag.AlignCenter
 top = Qt.AlignmentFlag.AlignTop
 bottom = Qt.AlignmentFlag.AlignBottom
 left = Qt.AlignmentFlag.AlignLeft
-default = Qt.AlignmentFlag(0)
 
 class App(QApplication):
     def __init__(self):
