@@ -198,33 +198,27 @@ class loginframe(QFrame):
         layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.setVerticalSpacing(12)
 
-        # Title
         title = QLabel("ResQ")
         title.setObjectName("title")
         title.setAlignment(centre)
 
-        # Subtitle
         subtitle = QLabel("Emergency Response & Reporting")
         subtitle.setObjectName("subtitle")
         subtitle.setAlignment(centre)
 
-        # Username
         self.uentry = QLineEdit()
         self.uentry.setPlaceholderText("Username")
         self.uentry.setFixedSize(350, 45)
 
-        # Password
         self.pentry = QLineEdit()
         self.pentry.setPlaceholderText("Password")
         self.pentry.setEchoMode(QLineEdit.EchoMode.Password)
         self.pentry.setFixedSize(350, 45)
 
-        # Login button
         btn = QPushButton("LOGIN")
         btn.setFixedSize(350, 45)
         btn.clicked.connect(self.login_btn)
 
-        # Layout
         layout.addWidget(title, 0, 0)
         layout.addWidget(subtitle, 1, 0)
         layout.setSpacing(15)
