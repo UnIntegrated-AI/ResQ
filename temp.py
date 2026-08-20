@@ -120,6 +120,8 @@ class mainframe(QFrame):
 
             self.setStyleSheet("""
             QFrame{
+                border: 1px solid #DC2626;
+                border-radius: 8px;
                 background-color: #f8f8ba;
                 color: black
             }
@@ -152,6 +154,7 @@ class mainframe(QFrame):
                 color: black;
                 font-size: 14px;
                 font-weight: bold;
+                border: none;
             }
          """)
 
