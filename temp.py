@@ -103,6 +103,7 @@ class mainframe(QFrame):
         self.lmf.setRowStretch(1,1)
 
         self.reportframe = self.reportf(self)
+        self.reportframe.hide()
   
     class reportf(QFrame):
         def __init__(self,parent):
@@ -171,7 +172,7 @@ class mainframe(QFrame):
             rptfl.addWidget(report_btn,3,0,1,2,alignment=Qt.AlignmentFlag.AlignHCenter) 
             report_btn.clicked.connect(self.report_func)
 
-            self.hide()
+
 
         def report_func(self):
             location = self.location_combo.currentData()
@@ -182,95 +183,95 @@ class mainframe(QFrame):
 
     def report(self):
         self.reportframe.show()
-        reportf = QFrame(self)
-        reportf.setStyleSheet("QFrame{border: 1px solid orange;}")
-        self.lmf.addWidget(reportf)
-        rptfl = QGridLayout(reportf)
+    #     reportf = QFrame(self)
+    #     reportf.setStyleSheet("QFrame{border: 1px solid orange;}")
+    #     self.lmf.addWidget(reportf)
+    #     rptfl = QGridLayout(reportf) 
 
-        rptfl.setRowStretch(0,1)
-        rptfl.setRowStretch(1,1)
-        rptfl.setRowStretch(2,1)
+    #     rptfl.setRowStretch(0,1)
+    #     rptfl.setRowStretch(1,1)
+    #     rptfl.setRowStretch(2,1)
 
-        rptfl.setColumnStretch(0,3)
-        rptfl.setColumnStretch(1,5)
+    #     rptfl.setColumnStretch(0,3)
+    #     rptfl.setColumnStretch(1,5)
 
-        self.setStyleSheet("""
-            QFrame{
-                background-color: whitesmoke;
-                color: black;
-            }
-            QPushButton{
-                background-color: #DC2626;
-                color: white;
-                border: none;
-                border-radius: 8px;
-                padding: 11px;
-                font-size: 15px;
-                font-weight: bold;
-            }
-            QSpinBox{
-                background-color: white;
-                color: #172033;
-                border: 1px solid #D1D5DB;
-                border-radius: 8px;
-                padding: 10px;
-                font-size: 14px;
-            }
-            QComboBox{
-                background-color: white;
-                color: #172033;
-                border: 1px solid #D1D5DB;
-                border-radius: 8px;
-                padding: 10px;
-                font-size: 14px;
-            }
-        """)
+    #     self.setStyleSheet("""
+    #         QFrame{
+    #             background-color: whitesmoke;
+    #             color: black;
+    #         }
+    #         QPushButton{
+    #             background-color: #DC2626;
+    #             color: white;
+    #             border: none;
+    #             border-radius: 8px;
+    #             padding: 11px;
+    #             font-size: 15px;
+    #             font-weight: bold;
+    #         }
+    #         QSpinBox{
+    #             background-color: white;
+    #             color: #172033;
+    #             border: 1px solid #D1D5DB;
+    #             border-radius: 8px;
+    #             padding: 10px;
+    #             font-size: 14px;
+    #         }
+    #         QComboBox{
+    #             background-color: white;
+    #             color: #172033;
+    #             border: 1px solid #D1D5DB;
+    #             border-radius: 8px;
+    #             padding: 10px;
+    #             font-size: 14px;
+    #         }
+    #     """)
 
-        #Location thing
-        location_heading = QLabel("Location of Incident")
-        rptfl.addWidget(location_heading, 0,0)
+    #     #Location thing
+    #     location_heading = QLabel("Location of Incident")
+    #     rptfl.addWidget(location_heading, 0,0)
 
-        self.location_combo = QComboBox(reportf)
-        # with open(r"C:\Users\yadav\OneDrive\Desktop\Ansh\New folder\Accident Prone Areas\accident_prone_areas.csv","r") as f:
-        #     reader = csv.reader(f)
-        #     next(reader)
-        reader = ["hello", "world", "wow","nice"]
-        for row in reader:
-            self.location_combo.addItem(row)
-        rptfl.addWidget(self.location_combo, 0,1)
+    #     self.location_combo = QComboBox(reportf)
+    #     # with open(r"C:\Users\yadav\OneDrive\Desktop\Ansh\New folder\Accident Prone Areas\accident_prone_areas.csv","r") as f:
+    #     #     reader = csv.reader(f)
+    #     #     next(reader)
+    #     reader = ["hello", "world", "wow","nice"]
+    #     for row in reader:
+    #         self.location_combo.addItem(row)
+    #     rptfl.addWidget(self.location_combo, 0,1)
   
-        #no. of pepole affected thing 
-        npa_heading = QLabel("No. of people affected")
-        rptfl.addWidget(npa_heading, 1,0)
+    #     #no. of pepole affected thing 
+    #     npa_heading = QLabel("No. of people affected")
+    #     rptfl.addWidget(npa_heading, 1,0)
         
-        self.npa = QSpinBox(reportf)
-        self.npa.setMinimum(1) 
-        self.npa.setMaximum(100) 
-        rptfl.addWidget(self.npa, 1,1)
+    #     self.npa = QSpinBox(reportf)
+    #     self.npa.setMinimum(1) 
+    #     self.npa.setMaximum(100) 
+    #     rptfl.addWidget(self.npa, 1,1)
 
-        # type of accident thing
-        taccd_heading = QLabel("Type of Incident") 
-        rptfl.addWidget(taccd_heading, 2,0) 
+    #     # type of accident thing
+    #     taccd_heading = QLabel("Type of Incident") 
+    #     rptfl.addWidget(taccd_heading, 2,0) 
 
-        type_of_accidents = ["Road Accident", "Landslide", "Fuel", "Motor support"]
+    #     type_of_accidents = ["Road Accident", "Landslide", "Fuel", "Motor support"]
 
-        self.taccd = QComboBox(reportf)
-        for a in type_of_accidents: 
-            self.taccd.addItem(a)
-        rptfl.addWidget(self.taccd, 2,1) 
+    #     self.taccd = QComboBox(reportf)
+    #     for a in type_of_accidents: 
+    #         self.taccd.addItem(a)
+    #     rptfl.addWidget(self.taccd, 2,1) 
 
-        # submit button
+    #     # submit button
 
-        report_btn = QPushButton("Report", reportf)
-        rptfl.addWidget(report_btn,3,0,1,2,alignment=Qt.AlignmentFlag.AlignHCenter) 
-        report_btn.clicked.connect(self.report_func)
+    #     report_btn = QPushButton("Report", reportf)
+    #     rptfl.addWidget(report_btn,3,0,1,2,alignment=Qt.AlignmentFlag.AlignHCenter) 
+    #     report_btn.clicked.connect(self.report_func)
 
-    def report_func(self):
-        location = self.location_combo.currentData()
-        npa = self.npa.value()
-        taccd = self.taccd.currentData()
+    # def report_func(self):
+    #     location = self.location_combo.currentData()
+    #     npa = self.npa.value()
+    #     taccd = self.taccd.currentData()
 
-        print(f"location:{location}\nno. of pepole affected:{npa}\ntype of incident:{taccd}")
+    #     print(f"location:{location}\nno. of pepole affected:{npa}\ntype of incident:{taccd}")
 
 class loginframe(QFrame):
     def __init__(self, parent, layoutapp):
