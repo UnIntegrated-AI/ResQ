@@ -114,7 +114,7 @@ def handle(client, uid):
                 break
             packet_type = packet["type"]
             if packet_type == "new_report":
-                location = packet["location"]
+                location = str(packet["location"])
                 npa = packet["npa"]
                 taccd = packet["taccd"]
                 save_report(uid,location,npa,taccd)
