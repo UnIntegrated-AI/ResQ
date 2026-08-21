@@ -12,6 +12,7 @@ from PySide6.QtWidgets import (
     QComboBox,
     QSpinBox,
     QScrollArea,
+    QRadioButton
 )
 from PySide6.QtCore import Qt
 import webbrowser
@@ -572,9 +573,12 @@ class loginframe(QFrame):
         self.pentry.setFixedSize(350, 45)
         layout.addWidget(self.pentry, 4, 0)
 
-        self.cou = QComboBox(self)
-        layout.addWidget(self.cou, 5, 0)
-        self.cou.addItems(["User", "Crew"])
+        self.cr = QRadioButton("User")
+        layout.addWidget(self.cr, 5, 0)
+        self.cr.toggle.connect(lambda:self.c("User"))
+        self.ur = QRadioButton("Crew")
+        layout.addWidget(self.ur, 5, 1)
+        self.ur.toggle.connect(lambda:self.c("Crew"))
 
 
         reg_log_btn = QPushButton("LOGIN/Register")
@@ -585,10 +589,12 @@ class loginframe(QFrame):
         layout.setSpacing(15)
         layout.setSpacing(10)
 
+    def c(t):
+        CREW = t
+
     def login_btn(self):
         uname = self.uentry.text().strip()
         passwd = self.pentry.text().strip()
-        crew = self.cou.currentText()
 
         if uname and passwd:
             global CREW, UNAME
