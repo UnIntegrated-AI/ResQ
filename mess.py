@@ -135,6 +135,15 @@ class user_details(QFrame):
             QLabel{
                 border: none;
             }
+            QPushButton{
+                background-color: #DC2626;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                padding: 11px;
+                font-size: 15px;
+                font-weight: bold;
+            }
         """)
         l = QLabel(f"username:\t{UNAME}")
         lud = QGridLayout(self)
@@ -191,7 +200,7 @@ class mainframe_crew(QScrollArea):
         self.mrl = QGridLayout(self.widget)
         self.setStyleSheet(""" 
             QFrame{  
-                border: 1px solid #dc6426;
+                border: 1px solid #DC2626;
                 border-radius: 8px;
             }
             QLabel{
@@ -200,9 +209,12 @@ class mainframe_crew(QScrollArea):
                 font-weight: bold;
             } 
             QPushButton{
+                background-color: #dc6426;
+                color: white;
                 border: none;
-                color: black;
-                font-size: 11px;
+                border-radius: 8px;
+                padding: 11px;
+                font-size: 15px;
                 font-weight: bold;
             } 
             """)
