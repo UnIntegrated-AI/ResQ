@@ -26,7 +26,7 @@ import os
 
 HOST = "127.0.0.1"
 PORT = 4848
-CREW = None
+CREW = "User"
 UNAME = None
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -548,7 +548,7 @@ class loginframe(QFrame):
             }
             QRadioButton::indicator {
                 width: 18px;
-                height: 18px;
+                height: 11px;
             }
             QRadioButton::indicator:unchecked {
                 border: 2px solid #A1A1AA;
