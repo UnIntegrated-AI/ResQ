@@ -7,7 +7,7 @@ import traceback
 
 HOST = "127.0.0.1"
 SERVER_HOST = "127.0.0.1"
-PORT = 4848
+PORT = 5050
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((HOST, PORT))

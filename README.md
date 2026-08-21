@@ -1,4 +1,0 @@
-# ResQ
-
-
-# HAAHAHAHHAHAHAHAHA

@@ -25,7 +25,7 @@ import sys
 import os
 
 HOST = "127.0.0.1"
-PORT = 4848
+PORT = 5050
 CREW = "User"
 UNAME = None
 
@@ -636,7 +636,6 @@ class loginframe(QFrame):
                 QTimer.singleShot(3000, lambda:self.res.hide())
 
             elif packet["type"] != "wrong_pass":
-
                 QTimer.singleShot(3000, self.proceed)
                 
         else:
