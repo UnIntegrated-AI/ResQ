@@ -178,6 +178,7 @@ def recv():
                 print(crew)
                 handle_thread = threading.Thread(target=handle, args=(client, uid), daemon=True)
                 handle_thread.start()
+                break
             elif result[0] == "register_success":
                 uid = result[1]
                 send_packet(client, {"type":result[0], "uid":uid, "crew":result[-1]})
@@ -188,6 +189,7 @@ def recv():
                 print(crew)
                 handle_thread = threading.Thread(target=handle, args=(client, uid), daemon=True)
                 handle_thread.start()
+                break
             elif result[0] == "wrong_pass":
                 send_packet(client, {"type":result[0]})
                 continue
