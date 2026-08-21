@@ -1,0 +1,7 @@
+mysql-connector-python==9.7.0
+pyside6==6.11.1
+pyside6_addons==6.11.1
+pyside6_essentials==6.11.1
+winrt_runtime==3.2.1
+winrt_windows_devices_geolocation==3.2.1
+winrt_windows_foundation==3.2.1
