@@ -402,13 +402,24 @@ class mainframe_user(QFrame):
             self.mrl = QGridLayout(self.widget)
             self.setStyleSheet(""" 
                 QFrame{  
-                    border: 1px solid black;
+                    border: 1px solid #D1D5DB;
+                    border-radius: 8px;
                 }
                 QLabel{
+                    border: none;
                     color: black;
                     font-size: 11px;
                     font-weight: bold;
-                } 
+                }
+                QPushButton{
+                    background-color: #dc6426;
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    padding: 11px;
+                    font-size: 15px;
+                    font-weight: bold;
+                }
                 """)
 
             for a in range(len(reports)):
@@ -504,43 +515,38 @@ class loginframe(QFrame):
         layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.setVerticalSpacing(12)
 
-        # Title
+
         title = QLabel("ResQ")
         title.setObjectName("title")
         title.setAlignment(centre)
         layout.addWidget(title, 0, 0)
 
-        # Subtitle
         subtitle = QLabel("Emergency Response & Reporting")
         subtitle.setObjectName("subtitle")
         subtitle.setAlignment(centre)
         layout.addWidget(subtitle, 1, 0)
 
-        # Username
         self.uentry = QLineEdit()
         self.uentry.setPlaceholderText("Username")
         self.uentry.setFixedSize(350, 45)
         layout.addWidget(self.uentry, 3, 0)
 
-        # Password
         self.pentry = QLineEdit()
         self.pentry.setPlaceholderText("Password")
         self.pentry.setEchoMode(QLineEdit.EchoMode.Password)
         self.pentry.setFixedSize(350, 45)
         layout.addWidget(self.pentry, 4, 0)
 
-        # Crew confirmation
         self.cou = QComboBox(self)
         layout.addWidget(self.cou, 5, 0)
         self.cou.addItems(["User", "Crew"])
 
-        # Login button
-        btn = QPushButton("LOGIN")
-        btn.setFixedSize(350, 45)
-        btn.clicked.connect(self.login_btn)
-        layout.addWidget(btn, 7, 0)
 
-        # Layout
+        reg_log_btn = QPushButton("LOGIN/Register")
+        reg_log_btn.setFixedSize(350, 45)
+        reg_log_btn.clicked.connect(self.login_btn)
+        layout.addWidget(reg_log_btn, 7, 0)
+
         layout.setSpacing(15)
         layout.setSpacing(10)
 
