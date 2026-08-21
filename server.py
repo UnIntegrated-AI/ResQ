@@ -190,6 +190,7 @@ def recv():
                 handle_thread.start()
             elif result[0] == "wrong_pass":
                 send_packet(client, {"type":result[0]})
+                continue
         except Exception as e:
             print(f"Error: {e}")
 
