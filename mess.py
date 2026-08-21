@@ -555,41 +555,42 @@ class loginframe(QFrame):
         title = QLabel("ResQ")
         title.setObjectName("title")
         title.setAlignment(centre)
-        layout.addWidget(title, 0, 0)
+        layout.addWidget(title, 0, 0,1,2)
 
         subtitle = QLabel("Emergency Response & Reporting")
         subtitle.setObjectName("subtitle")
         subtitle.setAlignment(centre)
-        layout.addWidget(subtitle, 1, 0)
+        layout.addWidget(subtitle, 1, 0,1,2)
 
         self.uentry = QLineEdit()
         self.uentry.setPlaceholderText("Username")
         self.uentry.setFixedSize(350, 45)
-        layout.addWidget(self.uentry, 3, 0)
+        layout.addWidget(self.uentry, 3, 0,1,2)
 
         self.pentry = QLineEdit()
         self.pentry.setPlaceholderText("Password")
         self.pentry.setEchoMode(QLineEdit.EchoMode.Password)
         self.pentry.setFixedSize(350, 45)
-        layout.addWidget(self.pentry, 4, 0)
+        layout.addWidget(self.pentry, 4, 0,1,2)
 
         self.cr = QRadioButton("User")
         layout.addWidget(self.cr, 5, 0)
-        self.cr.toggle.connect(lambda:self.c("User"))
+        self.cr.toggled.connect(lambda:self.c("User"))
         self.ur = QRadioButton("Crew")
         layout.addWidget(self.ur, 5, 1)
-        self.ur.toggle.connect(lambda:self.c("Crew"))
+        self.ur.toggled.connect(lambda:self.c("Crew"))
 
 
         reg_log_btn = QPushButton("LOGIN/Register")
         reg_log_btn.setFixedSize(350, 45)
         reg_log_btn.clicked.connect(self.login_btn)
-        layout.addWidget(reg_log_btn, 7, 0)
+        layout.addWidget(reg_log_btn, 7, 0,1,2)
 
         layout.setSpacing(15)
         layout.setSpacing(10)
 
-    def c(t):
+    def c(self,t):
+        global CREW
         CREW = t
 
     def login_btn(self):
@@ -597,8 +598,7 @@ class loginframe(QFrame):
         passwd = self.pentry.text().strip()
 
         if uname and passwd:
-            global CREW, UNAME
-            CREW = crew
+            global UNAME
             UNAME = uname
             print(f"username: {uname}")
             print(f"password: {passwd}")
@@ -608,7 +608,7 @@ class loginframe(QFrame):
                     "type": "login_details",
                     "uname": uname,
                     "passwd": passwd,
-                    "crew": crew,
+                    "crew": CREW,
                 },
             )
             packet = recv_packet(client)
