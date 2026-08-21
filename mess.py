@@ -627,29 +627,25 @@ class loginframe(QFrame):
                 },
             )
             packet = recv_packet(client)
+            self.res = QLabel(packet["type"])
+            self.layout.addWidget(self.res, 6,0,1,2)
+            self.uentry.clear()
+            self.pentry.clear()
             if packet["type"] == "wrong_pass":
-                self.res = QLabel(packet["type"])
-                self.layout.addWidget(self.res, 6,0,1,2)
-                QTimer.singleShot(3000, self.proceed)
-
+                QTimer.singleShot(3000, lambda:self.res.hide())
 
             elif packet["type"] != "wrong_pass":
-                self.uentry.clear()
-                self.pentry.clear()
 
-                self.res = QLabel(packet["type"])
-                self.layout.addWidget(self.res, 6,0,1,2)
                 QTimer.singleShot(3000, self.proceed)
-
-                self.hide()
-                mc = maincontainer(self,self.app)
-                self.layoutapp.addWidget(mc, 0, 0)
+                
         else:
             print("Enter Username and Password")
             return
 
     def proceed(self):
-        self.res.hide()
+        self.hide()
+        mc = maincontainer(self,self.app)
+        self.layoutapp.addWidget(mc, 0, 0)
 
 
 app = App()

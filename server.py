@@ -31,7 +31,7 @@ cursor.execute("create table if not exists users(uid int primary key, uname varc
 cursor.execute("create table if not exists reports(report_id int auto_increment primary key, uid int not null, location varchar(100) not null, npa varchar(100) not null, taccd varchar(100) not null, status bool not null default true)")
 
 def append_crew():
-    cursor.execute("select uid where crew = True")
+    cursor.execute("select uid from users where crew = True")
     members = cursor.fetchall()
     for i in members:
         crew.append(i[0])
@@ -39,18 +39,16 @@ def append_crew():
 def reg_login(uname, passwd, crew):
     cursor.execute("select * from users where uname = %s and passwd = %s",(uname, passwd))
     result = cursor.fetchone()
-    cursor.execute("select uname from users where uname = %s and passwd != %s",(uname,passwd))
-    wrong_pass = cursor.fetchone()
-    if result[1]:
+    if result is not None:
         return ["login_success", result[0], result[-1]]
-    else:
-        if wrong_pass:
-            return ["wrong_pass"]
-        else:
-            uid = random_id()
-            cursor.execute("insert into users(uid, uname, passwd, crew) values(%s ,%s ,%s, %s)",(uid, uname, passwd, crew))
-            conn.commit()
-            return ["register_success", uid, result[-1]]
+    cursor.execute("select * from users where uname = %s",(uname,))
+    user_exists = cursor.fetchone()
+    if user_exists:
+        return ["wrong_pass"]
+    uid = random_id()
+    cursor.execute("insert into users(uid, uname, passwd, crew) values(%s ,%s ,%s, %s)",(uid, uname, passwd, crew))
+    conn.commit()
+    return ["register_success", uid, crew]
 
 
 
