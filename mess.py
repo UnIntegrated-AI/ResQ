@@ -236,18 +236,18 @@ class mainframe_crew(QScrollArea):
             rf = QFrame(self.widget)
             self.mrl.addWidget(rf, a, 0)
             fl = QGridLayout(rf)
-            locl = QLabel(f"Location:\t{str(reports[a][0])}")
+            locl = QLabel(f"Location:\t{str(reports[a][2])}")
             fl.addWidget(locl, 0, 0, alignment=left)
-            npal = QLabel(f"No. of People affected:\t{str(reports[a][1])}")
+            npal = QLabel(f"No. of People affected:\t{str(reports[a][3])}")
             fl.addWidget(npal, 1, 0, alignment=left)
-            taccdl = QLabel(f"Type of Incident:\t{str(reports[a][2])}")
+            taccdl = QLabel(f"Type of Incident:\t{str(reports[a][4])}")
             fl.addWidget(taccdl, 2, 0, alignment=left)
-            stsl = QLabel("Status:\tOpen" if str(reports[a][3]) == "1" else "Status:\tClosed")
+            stsl = QLabel("Status:\tOpen" if str(reports[a][5]) == "1" else "Status:\tClosed")
             fl.addWidget(stsl, 3, 0, alignment=left)
 
             tkac = QPushButton("take action")
             fl.addWidget(tkac, 4,0,alignment=right|bottom)
-            tkac.clicked.connect(lambda checked=False, k=reports[a][0]: self.openmap(k))
+            tkac.clicked.connect(lambda checked=False, k=reports[a][2]: self.openmap(str(k)))
 
             fl.setRowStretch(0,1)
             fl.setRowStretch(1,1)
@@ -256,6 +256,7 @@ class mainframe_crew(QScrollArea):
             fl.setRowStretch(4,2)
 
     def openmap(self,locl):
+        print(locl)
         locl = locl[1:]
         locl = locl.split(",")
 
