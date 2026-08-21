@@ -215,7 +215,9 @@ class mainframe_crew(QScrollArea):
             fl.setRowStretch(4,2)
 
     def openmap(self,locl):
-        print(f"{locl} ka map laga do")
+        locl = locl[1:]
+        locl = locl.split(",")
+        open_map(locl[0],locl[1])
 
     def get_reports(self):
         result = []
