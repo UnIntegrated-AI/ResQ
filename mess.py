@@ -1,6 +1,5 @@
 import socket
 import json
-import csv
 from PySide6.QtWidgets import (
     QApplication,
     QWidget,
@@ -491,21 +490,18 @@ class loginframe(QFrame):
         self.app = app
 
         self.setStyleSheet("""
-            QFrame {
+            QFrame{
                 background-color: #fff2cc;
             }
-
-            QLabel#title {
+            QLabel#title{
                 color: #172033;
                 font-size: 32px;
                 font-weight: bold;
             }
-
-            QLabel#subtitle {
+            QLabel#subtitle{
                 color: #6B7280;
                 font-size: 14px;
             }
-
             QComboBox{
                 background-color: #fff2cc;
                 color: black;
@@ -514,8 +510,7 @@ class loginframe(QFrame):
                 padding: 10px;
                 font-size: 14px;
             }
-
-            QLineEdit {
+            QLineEdit{
                 background-color: #fff2cc;
                 color: #172033;
                 border: 1px solid #D1D5DB;
@@ -523,12 +518,10 @@ class loginframe(QFrame):
                 padding: 10px;
                 font-size: 14px;
             }
-
-            QLineEdit:focus {
+            QLineEdit:focus{
                 border: 2px solid #DC2626;
             }
-
-            QPushButton {
+            QPushButton{
                 background-color: #DC2626;
                 color: white;
                 border: none;
@@ -537,13 +530,30 @@ class loginframe(QFrame):
                 font-size: 15px;
                 font-weight: bold;
             }
-
-            QPushButton:hover {
+            QPushButton:hover{
                 background-color: #B91C1C;
             }
-
-            QPushButton:pressed {
+            QPushButton:pressed{
                 background-color: #991B1B;
+            }
+            QRadioButton {
+                color: #18181B;
+                font-size: 16px;
+                spacing: 8px;
+            }
+            QRadioButton::indicator {
+                width: 18px;
+                height: 18px;
+            }
+            QRadioButton::indicator:unchecked {
+                border: 2px solid #A1A1AA;
+                border-radius: 9px;
+                background-color: #FAFAFA;
+            }
+            QRadioButton::indicator:checked {
+                border: 2px solid #52525B;
+                border-radius: 9px;
+                background-color: #52525B;
             }
         """)
 
@@ -612,7 +622,7 @@ class loginframe(QFrame):
                 },
             )
             packet = recv_packet(client)
-            crew = packet["crew"]
+            uid = packet["uid"]
             self.uentry.clear()
             self.pentry.clear()
 
