@@ -134,6 +134,8 @@ class user_details(QFrame):
             }
             QLabel{
                 border: none;
+                font-size: 14px;
+                font-weight: bold;
             }
             QPushButton{
                 background-color: #DC2626;
