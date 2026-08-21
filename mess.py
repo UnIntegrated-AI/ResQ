@@ -547,13 +547,14 @@ class loginframe(QFrame):
                 spacing: 8px;
             }
             QRadioButton::indicator {
-                width: 18px;
-                height: 11px;
+                width: 10px;
+                height: 10px;
+                border-radius: 5px;
             }
             QRadioButton::indicator:unchecked {
                 border: 2px solid #A1A1AA;
                 border-radius: 9px;
-                background-color: fff2cc;
+                background-color: #fff2cc;
             }
             QRadioButton::indicator:checked {
                 border: 2px solid #52525B;
