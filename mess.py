@@ -265,7 +265,7 @@ class mainframe_crew(QScrollArea):
 
     def get_reports(self):
         result = []
-        send_packet(client, {"type": "view_reports"})
+        send_packet(client, {"type": "send_reports"})
         result = recv_packet(client)
         return result["reports"]
 
@@ -636,6 +636,7 @@ class loginframe(QFrame):
                 QTimer.singleShot(3000, lambda:self.res.hide())
 
             elif packet["type"] != "wrong_pass":
+
                 QTimer.singleShot(3000, self.proceed)
                 
         else:

@@ -122,6 +122,10 @@ def handle(client, uid):
                 npa = packet["npa"]
                 taccd = packet["taccd"]
                 save_report(uid,location,npa,taccd)
+            elif packet_type == "send_reports":
+                cursor.execute("select * from reports")
+                reports = cursor.fetchall()
+                send_packet(client, {"type":"reports", "reports":reports})
             elif packet_type == "view_reports":
                 reports = fetch_reports(uid)
                 send_packet(client, {"type":"reports", "reports":reports})
