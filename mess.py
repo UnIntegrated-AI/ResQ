@@ -13,7 +13,7 @@ from PySide6.QtWidgets import (
     QScrollArea,
     QRadioButton
 )
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QTimer
 import webbrowser
 import asyncio
 from winrt.windows.devices.geolocation import (
@@ -562,47 +562,47 @@ class loginframe(QFrame):
             }
         """)
 
-        layout = QGridLayout(self)
-        layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        layout.setVerticalSpacing(12)
+        self.layout = QGridLayout(self)
+        self.layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.layout.setVerticalSpacing(12)
 
 
         title = QLabel("ResQ")
         title.setObjectName("title")
         title.setAlignment(centre)
-        layout.addWidget(title, 0, 0,1,2)
+        self.layout.addWidget(title, 0, 0,1,2)
 
         subtitle = QLabel("Emergency Response & Reporting")
         subtitle.setObjectName("subtitle")
         subtitle.setAlignment(centre)
-        layout.addWidget(subtitle, 1, 0,1,2)
+        self.layout.addWidget(subtitle, 1, 0,1,2)
 
         self.uentry = QLineEdit()
         self.uentry.setPlaceholderText("Username")
         self.uentry.setFixedSize(350, 45)
-        layout.addWidget(self.uentry, 3, 0,1,2)
+        self.layout.addWidget(self.uentry, 3, 0,1,2)
 
         self.pentry = QLineEdit()
         self.pentry.setPlaceholderText("Password")
         self.pentry.setEchoMode(QLineEdit.EchoMode.Password)
         self.pentry.setFixedSize(350, 45)
-        layout.addWidget(self.pentry, 4, 0,1,2)
+        self.layout.addWidget(self.pentry, 4, 0,1,2)
 
         self.cr = QRadioButton("User")
-        layout.addWidget(self.cr, 5, 0)
+        self.layout.addWidget(self.cr, 5, 0)
         self.cr.toggled.connect(lambda:self.c("User"))
         self.ur = QRadioButton("Crew")
-        layout.addWidget(self.ur, 5, 1)
+        self.layout.addWidget(self.ur, 5, 1)
         self.ur.toggled.connect(lambda:self.c("Crew"))
 
 
         reg_log_btn = QPushButton("LOGIN/Register")
         reg_log_btn.setFixedSize(350, 45)
         reg_log_btn.clicked.connect(self.login_btn)
-        layout.addWidget(reg_log_btn, 7, 0,1,2)
+        self.layout.addWidget(reg_log_btn, 7, 0,1,2)
 
-        layout.setSpacing(15)
-        layout.setSpacing(10)
+        self.layout.setSpacing(15)
+        self.layout.setSpacing(10)
 
     def c(self,t):
         global CREW
@@ -627,20 +627,29 @@ class loginframe(QFrame):
                 },
             )
             packet = recv_packet(client)
-            if packet["type"] != "wrong_pass":
+            if packet["type"] == "wrong_pass":
+                self.res = QLabel(packet["type"])
+                self.layout.addWidget(self.res, 6,0,1,2)
+                QTimer.singleShot(3000, self.proceed)
+
+
+            elif packet["type"] != "wrong_pass":
                 self.uentry.clear()
                 self.pentry.clear()
+
+                self.res = QLabel(packet["type"])
+                self.layout.addWidget(self.res, 6,0,1,2)
+                QTimer.singleShot(3000, self.proceed)
 
                 self.hide()
                 mc = maincontainer(self,self.app)
                 self.layoutapp.addWidget(mc, 0, 0)
-            elif packet["type"] == "login_success":
-                pass
-            elif packet["type"] == "register_success":
-                pass
         else:
             print("Enter Username and Password")
             return
+
+    def proceed(self):
+        self.res.hide()
 
 
 app = App()
