@@ -127,6 +127,16 @@ def handle(client, uid):
                 approx = packet["approx"]
                 coords = [latitude, longitude, approx]
                 broadcast(coords)
+            elif packet_type == "logout":
+                if client in clients:
+                    index = clients.index(client)
+                    clients.pop(index)
+                    userids.pop(index)
+                try:
+                    client.close()
+                except:
+                    pass
+                break
     except Exception as e:
         print(e)
         traceback.print_exc()

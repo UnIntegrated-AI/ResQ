@@ -147,7 +147,9 @@ class user_details(QFrame):
     def signout(self):
         self.parent.hide()
         self.app.show()
-        # send_packet(client, )
+        send_packet(client, {"type":"logout"} )
+        client.close()
+        client.connect((HOST, PORT))
 
 
 class maincontainer(QFrame):
@@ -189,7 +191,8 @@ class mainframe_crew(QScrollArea):
         self.mrl = QGridLayout(self.widget)
         self.setStyleSheet(""" 
             QFrame{  
-                border: 1px solid black;
+                border: 1px solid #dc6426;
+                border-radius: 8px;
             }
             QLabel{
                 color: black;
@@ -197,6 +200,7 @@ class mainframe_crew(QScrollArea):
                 font-weight: bold;
             } 
             QPushButton{
+                border: none;
                 color: black;
                 font-size: 11px;
                 font-weight: bold;
