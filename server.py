@@ -39,13 +39,19 @@ def append_crew():
 def reg_login(uname, passwd, crew):
     cursor.execute("select * from users where uname = %s and passwd = %s",(uname, passwd))
     result = cursor.fetchone()
-    if result:
+    cursor.execute("select uname from users where uname = %s and passwd != %s",(uname,passwd))
+    wrong_pass = cursor.fetchone()
+    if result[1]:
         return ["login_success", result[0], result[-1]]
     else:
-        uid = random_id()
-        cursor.execute("insert into users(uid, uname, passwd, crew) values(%s ,%s ,%s, %s)",(uid, uname, passwd, crew))
-        conn.commit()
-        return ["register_success", uid, result[-1]]
+        if wrong_pass:
+            return ["wrong_pass"]
+        else:
+            uid = random_id()
+            cursor.execute("insert into users(uid, uname, passwd, crew) values(%s ,%s ,%s, %s)",(uid, uname, passwd, crew))
+            conn.commit()
+            return ["register_success", uid, result[-1]]
+
 
 
 def recv_exact(sock, size):
@@ -182,6 +188,8 @@ def recv():
                 print(crew)
                 handle_thread = threading.Thread(target=handle, args=(client, uid), daemon=True)
                 handle_thread.start()
+            elif result[0] == "wrong_pass":
+                send_packet(client, {"type":result[0]})
         except Exception as e:
             print(f"Error: {e}")
 

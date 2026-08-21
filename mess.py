@@ -627,13 +627,15 @@ class loginframe(QFrame):
                 },
             )
             packet = recv_packet(client)
-            uid = packet["uid"]
-            self.uentry.clear()
-            self.pentry.clear()
+            if packet["type"] != "wrong_pass":
+                self.uentry.clear()
+                self.pentry.clear()
 
-            self.hide()
-            mc = maincontainer(self,self.app)
-            self.layoutapp.addWidget(mc, 0, 0)
+                self.hide()
+                mc = maincontainer(self,self.app)
+                self.layoutapp.addWidget(mc, 0, 0)
+            else:
+                pass
         else:
             print("Enter Username and Password")
             return
