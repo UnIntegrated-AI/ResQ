@@ -543,7 +543,7 @@ class loginframe(QFrame):
             }
             QRadioButton {
                 color: #18181B;
-                font-size: 16px;
+                font-size: 14px;
                 spacing: 8px;
             }
             QRadioButton::indicator {
@@ -553,12 +553,12 @@ class loginframe(QFrame):
             QRadioButton::indicator:unchecked {
                 border: 2px solid #A1A1AA;
                 border-radius: 9px;
-                background-color: #FAFAFA;
+                background-color: fff2cc;
             }
             QRadioButton::indicator:checked {
                 border: 2px solid #52525B;
                 border-radius: 9px;
-                background-color: #52525B;
+                background-color: #DC2626;
             }
         """)
 
