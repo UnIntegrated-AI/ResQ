@@ -21,6 +21,8 @@ from winrt.windows.devices.geolocation import (
     PositionAccuracy,
     GeolocationAccessStatus,
 )
+import sys
+import os
 
 HOST = "127.0.0.1"
 PORT = 4848
@@ -111,7 +113,7 @@ class App(QApplication):
 
         layout = QGridLayout(self.window)
 
-        lf = loginframe(self.window, layout)
+        lf = loginframe(self.window, layout,self)
 
         layout.addWidget(lf, 0, 0)
 
@@ -119,9 +121,10 @@ class App(QApplication):
 
 
 class user_details(QFrame):
-    def __init__(self, parent,app):
+    def __init__(self, parent,lf,app):
         super().__init__(parent)
         self.parent = parent
+        self.lf = lf
         self.app = app
 
         self.setStyleSheet("""
@@ -134,11 +137,12 @@ class user_details(QFrame):
             }
             QLabel{
                 border: none;
+                color: black;
                 font-size: 14px;
                 font-weight: bold;
             }
             QPushButton{
-                background-color: #DC2626;
+                background-color: red;
                 color: white;
                 border: none;
                 border-radius: 8px;
@@ -147,30 +151,36 @@ class user_details(QFrame):
                 font-weight: bold;
             }
         """)
-        l = QLabel(f"username:\t{UNAME}")
         lud = QGridLayout(self)
-        lud.addWidget(l, 0, 0, alignment=right|top)
+        l = QLabel(f"Username:\t{UNAME}")
+        lud.addWidget(l, 0, 0, alignment=centre|top)
+
+        t = QLabel(f"Type:\t{CREW}")
+        lud.addWidget(t, 1, 0, alignment=centre|top)
 
         logout = QPushButton("Logout")
-        lud.addWidget(logout, 1,0, alignment=bottom)
+        lud.addWidget(logout, 2,0, alignment=bottom)
+        lud.setRowStretch(0,1)
+        lud.setRowStretch(1,1)
+        lud.setRowStretch(2,5)
         logout.clicked.connect(self.signout)
 
     def signout(self):
         self.parent.hide()
-        self.app.show()
+        self.lf.show()
         send_packet(client, {"type":"logout"} )
-        client.close()
-        client.connect((HOST, PORT))
-
+        self.app.quit()
+        os.execv(sys.executable, [sys.executable]+sys.argv)
+        
 
 class maincontainer(QFrame):
-    def __init__(self, parent):
+    def __init__(self, parent,app):
         super().__init__(parent)
         self.setStyleSheet("background-color: #fff2cc;")
 
         lmc = QGridLayout(self)
 
-        udf = user_details(self,parent)
+        udf = user_details(self,parent,app)
         lmc.addWidget(udf, 0, 1)
         if CREW == "Crew":
             mff = mainframe_crew(self)
@@ -206,6 +216,7 @@ class mainframe_crew(QScrollArea):
                 border-radius: 8px;
             }
             QLabel{
+                border: none;
                 color: black;
                 font-size: 11px;
                 font-weight: bold;
@@ -471,11 +482,12 @@ class mainframe_user(QFrame):
 
 
 class loginframe(QFrame):
-    def __init__(self, parent, layoutapp):
+    def __init__(self, parent, layoutapp,app):
         super().__init__(parent)
 
         self.parent = parent
         self.layoutapp = layoutapp
+        self.app = app
 
         self.setStyleSheet("""
             QFrame {
@@ -599,7 +611,7 @@ class loginframe(QFrame):
             self.pentry.clear()
 
             self.hide()
-            mc = maincontainer(self)
+            mc = maincontainer(self,self.app)
             self.layoutapp.addWidget(mc, 0, 0)
         else:
             print("Enter Username and Password")
