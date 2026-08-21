@@ -502,6 +502,11 @@ class loginframe(QFrame):
                 color: #6B7280;
                 font-size: 14px;
             }
+            QLabel{
+                color: black;
+                font-size: 11px;
+                font-weight: bold;
+            }
             QComboBox{
                 background-color: #fff2cc;
                 color: black;
