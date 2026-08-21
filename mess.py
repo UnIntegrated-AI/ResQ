@@ -634,7 +634,9 @@ class loginframe(QFrame):
                 self.hide()
                 mc = maincontainer(self,self.app)
                 self.layoutapp.addWidget(mc, 0, 0)
-            else:
+            elif packet["type"] == "login_success":
+                pass
+            elif packet["type"] == "register_success":
                 pass
         else:
             print("Enter Username and Password")
