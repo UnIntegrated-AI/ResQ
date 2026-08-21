@@ -31,7 +31,7 @@ cursor.execute("create table if not exists users(uid int primary key, uname varc
 cursor.execute("create table if not exists reports(report_id int auto_increment primary key, uid int not null, location varchar(100) not null, npa varchar(100) not null, taccd varchar(100) not null, status bool not null default true)")
 
 def append_crew():
-    cursor.execute("select uid from users where crew = True")
+    cursor.execute("select uid from users where crew = \"Crew\"")
     members = cursor.fetchall()
     for i in members:
         crew.append(i[0])
