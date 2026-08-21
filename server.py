@@ -27,7 +27,7 @@ cursor = conn.cursor(buffered=True)
 
 cursor.execute("create database if not exists resq")
 cursor.execute("use resq")
-cursor.execute("create table if not exists users(uid int primary key, uname varchar(50) not null, passwd varchar(50) not null, crew bool not null default false)")
+cursor.execute("create table if not exists users(uid int primary key, uname varchar(50) not null, passwd varchar(50) not null, crew varchar(50) not null")
 cursor.execute("create table if not exists reports(report_id int auto_increment primary key, uid int not null, location varchar(100) not null, npa varchar(100) not null, taccd varchar(100) not null, status bool not null default true)")
 
 def append_crew():
